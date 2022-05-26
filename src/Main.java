@@ -9,7 +9,7 @@
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Santi branch");
-        System.out.println("Me gusta licho");
+        System.out.println("Matias Fierro");
+        System.out.println("Bienvenido al proyecto");
     }
 }
