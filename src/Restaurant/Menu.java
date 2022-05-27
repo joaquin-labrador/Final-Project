@@ -5,5 +5,5 @@ import java.util.List;
 
 public class Menu {
     private double price;
-    private List<Food> ingredients = new ArrayList<>();
+    private List<Food>  ingredients= new ArrayList<>();
 }
