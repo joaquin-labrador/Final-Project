@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 public abstract class  Employee {
     private String name;
-    private String lastName;
+    private String surName;
     private LocalDate dateOfBrith;
     private Integer id;
     private boolean isWorking = false;
@@ -13,9 +13,10 @@ public abstract class  Employee {
     public Employee() {
     }
 
-    public Employee(String name, String lastName, LocalDate dateOfBrith, Integer id) {
+
+    public Employee(String name, String surName, LocalDate dateOfBrith, Integer id) {
         this.name = name;
-        this.lastName = lastName;
+        this.surName = surName;
         this.dateOfBrith = dateOfBrith;
         this.id = id;
     }
@@ -24,8 +25,8 @@ public abstract class  Employee {
         return name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurName() {
+        return surName;
     }
 
     public LocalDate getDateOfBrith() {
@@ -40,8 +41,8 @@ public abstract class  Employee {
         this.name = name;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurName(String lastName) {
+        this.surName = surName;
     }
 
     public void setDateOfBrith(LocalDate dateOfBrith) {
