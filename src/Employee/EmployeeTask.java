@@ -8,7 +8,7 @@ public interface EmployeeTask {
     void takeOrder(Table table);
     void bookTable(Table table, int numberTable);
     void deleteEmployee(Employee employee, Integer id);
-    void priceEdit();
+    void priceEdit(Menu manu, double newPrice);
     void agreeStock(Food food);
     void agreePlate(Menu menu, Lounge lounge);
     void cancelBook(Table table, int numberTable);
