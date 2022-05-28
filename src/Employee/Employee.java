@@ -3,27 +3,21 @@ package Employee;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public abstract class Employee {
+public abstract class  Employee {
     private String name;
     private String lastName;
     private LocalDate dateOfBrith;
     private Integer id;
     private boolean isWorking = false;
-    private String password;
-    private String userName;
-
-    //region CONSTRUCTORS GETTERS AND SETTERS
+ //region CONSTRUCTORS GETTERS AND SETTERS
     public Employee() {
     }
 
-    public Employee(String name, String lastName, LocalDate dateOfBrith, Integer id,
-                    String userName, String password) {
+    public Employee(String name, String lastName, LocalDate dateOfBrith, Integer id) {
         this.name = name;
         this.lastName = lastName;
         this.dateOfBrith = dateOfBrith;
         this.id = id;
-        this.password = password;
-        this.userName = userName;
     }
 
     public String getName() {
@@ -61,17 +55,14 @@ public abstract class Employee {
     public void setWorking(boolean working) {
         isWorking = working;
     }
-
     //endregion
-    private void startDay() {
+    private void startDay(){
         this.isWorking = true;
     }
-
     abstract void finishDay(); //Here finish day and upload the salary of that working day, depends of position
 
-    private int getAge() {
-        return (int) ChronoUnit.YEARS.between(dateOfBrith, LocalDate.now());
+    private int getAge(){
+        return (int) ChronoUnit.YEARS.between(dateOfBrith,LocalDate.now());
     }
 
 }
-
