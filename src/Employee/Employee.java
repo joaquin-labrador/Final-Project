@@ -3,6 +3,8 @@ package Employee;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+
+
 public abstract class Employee {
     private String name;
     private String lastName;
@@ -94,5 +96,18 @@ public abstract class Employee {
         return (int) ChronoUnit.YEARS.between(dateOfBrith, LocalDate.now());
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBrith=" + dateOfBrith +
+                ", id=" + id +
+                ", isWorking=" + isWorking +
+                ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }
+
 

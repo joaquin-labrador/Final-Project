@@ -1,4 +1,4 @@
-package project_classes;
+package Employee;
 
 import Employee.Employee;
 
@@ -40,5 +40,13 @@ public class Host extends Employee {
     @Override
     protected void finishDay() {
 
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Host{" +
+                "hourSalary=" + hourSalary +
+                ", tips=" + tips +
+                '}';
     }
 }
