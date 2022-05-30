@@ -88,7 +88,7 @@ public abstract class Employee {
         this.isWorking = true;
     }
 
-    abstract void finishDay(); //Here finish day and upload the salary of that working day, depends of position
+    protected abstract void finishDay(); //Here finish day and upload the salary of that working day, depends of position
 
     private int getAge() {
         return (int) ChronoUnit.YEARS.between(dateOfBrith, LocalDate.now());
