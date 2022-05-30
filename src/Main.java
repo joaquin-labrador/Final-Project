@@ -2,6 +2,8 @@ import Employee.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Main {
         Manager manager1 = new Manager("Maximo", "Torterolo", LocalDate.of(2002, 6, 23),
                 44533543, "managerMaximo", "34324esds3", Salarys.SERVER.getSalary());
 
+
         employeeList.add(chef1);
         employeeList.add(kitchener1);
         employeeList.add(manager1);
@@ -28,6 +31,14 @@ public class Main {
         }
 
         System.out.println(employeeListJson.toString());
+
+        try(FileWriter file = new FileWriter("Employees.json")){
+            file.write(employeeListJson.toString());
+            file.flush();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
 
     }
 }
