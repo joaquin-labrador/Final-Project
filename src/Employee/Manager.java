@@ -2,6 +2,8 @@ package Employee;
 
 public class Manager extends Employee{
     private Double hourSalary;
+    private Boolean inEmergency = false;
+
 
 
 
