@@ -11,10 +11,10 @@ public class Manager extends Employee{
 
     }
 
-    public Manager(String name, String lastName, LocalDate dateOfBrith, Integer id, String userName, String password, Double hourSalary, Boolean inEmergency) {
+    public Manager(String name, String lastName, LocalDate dateOfBrith, Integer id, String userName, String password, Double hourSalary) {
         super(name, lastName, dateOfBrith, id, userName, password);
         this.hourSalary = hourSalary;
-        this.inEmergency = inEmergency;
+
     }
 
     public Double getHourSalary() {
@@ -29,8 +29,8 @@ public class Manager extends Employee{
         return inEmergency;
     }
 
-    public void setInEmergency(Boolean inEmergency) {
-        this.inEmergency = inEmergency;
+    public void setInEmergency( ) {
+        this.inEmergency = true;
     }
 
     @Override

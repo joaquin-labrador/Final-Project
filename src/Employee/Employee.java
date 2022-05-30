@@ -2,7 +2,7 @@ package Employee;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-
+import java.util.Objects;
 
 
 public abstract class Employee {
@@ -107,6 +107,21 @@ public abstract class Employee {
                 ", password='" + password + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        return Objects.equals(id, employee.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
 
