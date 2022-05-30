@@ -28,6 +28,9 @@ public class Main {
         employeeList.add(chef1);
         employeeList.add(kitchener1);
         employeeList.add(manager1);
+        employeeList.add(host1);
+        employeeList.add(server1);
+        employeeList.add(server2);
 
         JSONArray employeeListJson = new JSONArray();
 
