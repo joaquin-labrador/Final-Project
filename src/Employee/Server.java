@@ -1,5 +1,4 @@
-package project_classes;
-
+package Employee;
 
 import Employee.Employee;
 
@@ -44,5 +43,11 @@ public class Server extends Employee {
 
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + "Server{" +
+                "hourSalary=" + hourSalary +
+                ", tips=" + tips +
+                '}';
+    }
 }

@@ -38,4 +38,12 @@ public class Manager extends Employee{
         super.setWorking(false);
         // Calculas la deferencia de el clock in con el clockout
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Manager{" +
+                "hourSalary=" + hourSalary +
+                ", inEmergency=" + inEmergency +
+                '}';
+    }
 }
