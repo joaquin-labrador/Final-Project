@@ -1,20 +1,21 @@
 import Employee.Employee;
 import Files.EmployeeFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class AppResto {
     private String restoName;
     private List<Employee> restoEmployee = new ArrayList<>();
-    private EmployeeFile employeeFile = new EmployeeFile();
+    private final EmployeeFile employeeFile = new EmployeeFile();
 
-    public AppResto() {
+    public AppResto() throws IOException {
         this.restoEmployee = employeeFile.getEmployeeList();
 
     }
 
-    public AppResto(String restoName) {
+    public AppResto(String restoName) throws IOException {
         this.restoName = restoName;
         this.restoEmployee = employeeFile.getEmployeeList();
 

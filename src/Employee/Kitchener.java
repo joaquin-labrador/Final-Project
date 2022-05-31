@@ -25,7 +25,7 @@ public class Kitchener extends Employee{
     @Override
     public String toString() {
         return super.toString() + "Kitchener{" +
-                "hourSalary=" + hourSalary  +
+                "hourSalary=" + hourSalary  + "\n" +
                 '}';
     }
 

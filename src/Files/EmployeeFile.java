@@ -1,7 +1,7 @@
 package Files;
 
 
-import Employee.Employee;
+import Employee.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -14,25 +14,64 @@ import java.util.List;
 
 
 public class EmployeeFile implements FilesOperations{
-    List<Employee> employeeList;
+    List<Employee> employeeList = new ArrayList<>();
 
-    public EmployeeFile() {
+    public EmployeeFile() throws IOException {
         readFile();
     }
 
     @Override
-    public void readFile() {
+    public void readFile() throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        BufferedReader reader = null;
+        List<Manager> managerListAux = new ArrayList<>();
+        List<Chef> chefListAux = new ArrayList<>();
+        List<Kitchener> kitchenerListAux = new ArrayList<>();
+        List<Server> serverListAux = new ArrayList<>();
+        List<Host> hostListAux = new ArrayList<>();
+        BufferedReader readerManager = null;
+        BufferedReader readerChef = null;
+        BufferedReader readerKitchener = null;
+        BufferedReader readerServer = null;
+        BufferedReader readerHost = null;
         try {
-            reader = new BufferedReader(new FileReader("Employees.json"));
-            this.employeeList = gson.fromJson(reader,
-                    (new TypeToken<List<Employee>>() {}.getType()));
-            reader.close();
+            //region Read File
+            readerManager = new BufferedReader(new FileReader("JSONFiles\\Manager.json"));
+            readerChef = new BufferedReader(new FileReader("JSONFiles\\Chef.json"));
+            readerKitchener = new BufferedReader(new FileReader("JSONFiles\\Kitchener.json"));
+            readerServer= new BufferedReader(new FileReader("JSONFiles\\Servers.json"));
+            readerHost = new BufferedReader(new FileReader("JSONFiles\\Host.json"));
+            managerListAux = gson.fromJson(readerManager,
+                    (new TypeToken<List<Manager>>() {}.getType()));
+            chefListAux = gson.fromJson(readerChef,
+                    (new TypeToken<List<Chef>>() {}.getType()));
+            kitchenerListAux = gson.fromJson(readerKitchener,
+                    (new TypeToken<List<Kitchener>>() {}.getType()));
+            serverListAux = gson.fromJson(readerServer,
+                    (new TypeToken<List<Server>>() {}.getType()));
+            hostListAux = gson.fromJson(readerHost,
+                    (new TypeToken<List<Host>>() {}.getType()));
 
+            this.employeeList.addAll(managerListAux);
+            this.employeeList.addAll(chefListAux);
+            this.employeeList.addAll(kitchenerListAux);
+            this.employeeList.addAll(serverListAux);
+            this.employeeList.addAll(hostListAux);
+            //endregion
         } catch (IOException e){
+            System.out.println("File read Error\n");
             e.printStackTrace();
+        }finally {
+            //region Close Files
+            assert readerManager != null;
+            readerManager.close();
+            assert readerKitchener != null;
+            readerKitchener.close();
+            readerChef.close();
+            assert readerServer != null;
+            readerServer.close();
+            assert readerHost != null;
+            readerHost.close();
+            //endregion
         }
     }
 
@@ -47,8 +86,8 @@ public class EmployeeFile implements FilesOperations{
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new FileReader("Employees.json"));
-            System.out.println(reader);
+            reader = new BufferedReader(new FileReader("JSONFiles\\Manager.json"));
+            reader.toString();
 
         } catch (IOException e){
             e.printStackTrace();

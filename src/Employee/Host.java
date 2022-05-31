@@ -41,7 +41,7 @@ public class Host extends Employee {
     public String toString() {
         return super.toString() + "Host{" +
                 "hourSalary=" + hourSalary +
-                ", tips=" + tips +
+                ", tips=" + tips + "\n" +
                 '}';
     }
 }
