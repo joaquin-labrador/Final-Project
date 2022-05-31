@@ -1,7 +1,6 @@
 package Files;
 
 
-
 import Employee.Employee;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,7 +14,7 @@ import java.util.List;
 
 
 public class EmployeeFile implements FilesOperations{
-    List<Employee> employeeList = new ArrayList<>();
+    List<Employee> employeeList;
 
     public EmployeeFile() {
         readFile();
@@ -24,11 +23,13 @@ public class EmployeeFile implements FilesOperations{
     @Override
     public void readFile() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader("Employees.json"));
             this.employeeList = gson.fromJson(reader,
                     (new TypeToken<List<Employee>>() {}.getType()));
+            reader.close();
 
         } catch (IOException e){
             e.printStackTrace();

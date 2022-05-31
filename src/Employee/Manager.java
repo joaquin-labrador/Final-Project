@@ -33,11 +33,8 @@ public class Manager extends Employee{
         this.inEmergency = true;
     }
 
-    @Override
-    protected void finishDay() {
-        super.setWorking(false);
-        // Calculas la deferencia de el clock in con el clockout
-    }
+
+
 
     @Override
     public String toString() {

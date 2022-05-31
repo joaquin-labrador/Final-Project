@@ -36,10 +36,6 @@ public class Host extends Employee {
         this.tips = tips;
     }
 
-    @Override
-    protected void finishDay() {
-
-    }
 
     @Override
     public String toString() {

@@ -10,6 +10,8 @@ public final class AppResto {
     private EmployeeFile employeeFile = new EmployeeFile();
 
     public AppResto() {
+        this.restoEmployee = employeeFile.getEmployeeList();
+
     }
 
     public AppResto(String restoName) {

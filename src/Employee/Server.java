@@ -38,10 +38,6 @@ public class Server extends Employee {
     }
 
 
-    @Override
-    protected void finishDay() {
-
-    }
 
     @Override
     public String toString() {

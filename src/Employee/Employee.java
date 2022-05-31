@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 
-public abstract class Employee {
+public class Employee {
     private String name;
     private String lastName;
     private String dateOfBrith;
@@ -90,7 +90,7 @@ public abstract class Employee {
         this.isWorking = true;
     }
 
-    protected abstract void finishDay(); //Here finish day and upload the salary of that working day, depends of position
+   // protected abstract void finishDay(); //Here finish day and upload the salary of that working day, depends of position
 
     private int getAge() {
         LocalDate dateOfBirth = LocalDate.parse(this.dateOfBrith);
