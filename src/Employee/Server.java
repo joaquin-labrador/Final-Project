@@ -43,7 +43,7 @@ public class Server extends Employee {
     public String toString() {
         return super.toString() + "Server{" +
                 "hourSalary=" + hourSalary +
-                ", tips=" + tips +
+                ", tips=" + tips + "\n" +
                 '}';
     }
 }

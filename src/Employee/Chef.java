@@ -36,7 +36,7 @@ public class Chef extends Employee{
     public String toString() {
         return super.toString() + "Chef{" +
                 "hourSalary=" + hourSalary +
-                ", inEmergency=" + inEmergency +
+                ", inEmergency=" + inEmergency + "\n" +
                 '}';
     }
 
