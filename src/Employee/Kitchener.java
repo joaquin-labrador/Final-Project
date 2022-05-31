@@ -29,8 +29,5 @@ public class Kitchener extends Employee{
                 '}';
     }
 
-    @Override
-    protected void finishDay() {
 
-    }
 }

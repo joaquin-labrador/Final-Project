@@ -40,8 +40,4 @@ public class Chef extends Employee{
                 '}';
     }
 
-    @Override
-    protected void finishDay() {
-
-    }
 }
