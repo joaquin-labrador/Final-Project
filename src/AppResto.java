@@ -1,4 +1,5 @@
 import Employee.Employee;
+import Files.EmployeeFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +7,14 @@ import java.util.List;
 public final class AppResto {
     private String restoName;
     private List<Employee> restoEmployee = new ArrayList<>();
+    private EmployeeFile employeeFile = new EmployeeFile();
 
     public AppResto() {
     }
 
-    public AppResto(String restoName,List<Employee> restoEmployee) {
+    public AppResto(String restoName) {
         this.restoName = restoName;
-        this.restoEmployee = restoEmployee;
+        this.restoEmployee = employeeFile.getEmployeeList();
 
     }
 
@@ -30,5 +32,9 @@ public final class AppResto {
 
     public String getRestoName() {
         return restoName;
+    }
+
+    public void showFile(){
+        employeeFile.showFile();
     }
 }
