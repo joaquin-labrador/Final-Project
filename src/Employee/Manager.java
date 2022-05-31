@@ -11,7 +11,7 @@ public class Manager extends Employee{
 
     }
 
-    public Manager(String name, String lastName, LocalDate dateOfBrith, Integer id, String userName, String password, Double hourSalary) {
+    public Manager(String name, String lastName, String dateOfBrith, Integer id, String userName, String password, Double hourSalary) {
         super(name, lastName, dateOfBrith, id, userName, password);
         this.hourSalary = hourSalary;
 

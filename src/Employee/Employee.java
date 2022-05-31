@@ -8,7 +8,7 @@ import java.util.Objects;
 public abstract class Employee {
     private String name;
     private String lastName;
-    private LocalDate dateOfBrith;
+    private String dateOfBrith;
     private Integer id;
     private boolean isWorking = false;
     private String password;
@@ -18,7 +18,7 @@ public abstract class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String lastName, LocalDate dateOfBrith, Integer id,
+    public Employee(String name, String lastName, String dateOfBrith, Integer id,
                     String userName, String password) {
         this.name = name;
         this.lastName = lastName;
@@ -36,7 +36,7 @@ public abstract class Employee {
         return lastName;
     }
 
-    public LocalDate getDateOfBrith() {
+    public String getDateOfBrith() {
         return dateOfBrith;
     }
 
@@ -72,7 +72,7 @@ public abstract class Employee {
         this.lastName = lastName;
     }
 
-    public void setDateOfBrith(LocalDate dateOfBrith) {
+    public void setDateOfBrith(String dateOfBrith) {
         this.dateOfBrith = dateOfBrith;
     }
 
@@ -93,7 +93,8 @@ public abstract class Employee {
     protected abstract void finishDay(); //Here finish day and upload the salary of that working day, depends of position
 
     private int getAge() {
-        return (int) ChronoUnit.YEARS.between(dateOfBrith, LocalDate.now());
+        LocalDate dateOfBirth = LocalDate.parse(this.dateOfBrith);
+        return (int) ChronoUnit.YEARS.between(dateOfBirth, LocalDate.now());
     }
 
     @Override

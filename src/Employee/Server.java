@@ -14,7 +14,7 @@ public class Server extends Employee {
 
     }
 
-    public Server(String name, String lastName, LocalDate dateOfBrith, Integer id, String userName, String password, double hourSalary) {
+    public Server(String name, String lastName, String dateOfBrith, Integer id, String userName, String password, double hourSalary) {
         super(name, lastName, dateOfBrith, id, userName, password);
         this.hourSalary = hourSalary;
 

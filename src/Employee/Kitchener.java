@@ -8,7 +8,7 @@ public class Kitchener extends Employee{
     public Kitchener() {
     }
 
-    public Kitchener(String name, String lastName, LocalDate dateOfBrith, Integer id, String userName, String password, double hourSalary) {
+    public Kitchener(String name, String lastName, String dateOfBrith, Integer id, String userName, String password, double hourSalary) {
         super(name, lastName, dateOfBrith, id, userName, password);
         this.hourSalary = hourSalary;
     }
