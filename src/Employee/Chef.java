@@ -10,10 +10,11 @@ public class Chef extends Employee{
     public Chef() {
     }
 
-    public Chef(String name, String lastName, LocalDate dateOfBrith, Integer id, String userName, String password, double hourSalary) {
+    public Chef(String name, String lastName, String dateOfBrith, Integer id, String userName, String password, double hourSalary) {
         super(name, lastName, dateOfBrith, id, userName, password);
         this.hourSalary = hourSalary;
     }
+
 
     public double getHourSalary() {
         return hourSalary;
