@@ -1,0 +1,24 @@
+[
+  {
+    "hourSalary": 17.0,
+    "tips": 0.0,
+    "name": "Agustin",
+    "lastName": "Gomez",
+    "dateOfBrith": "1998-09-29",
+    "id": 41234234,
+    "isWorking": false,
+    "password": "@dfd678",
+    "userName": "serverAgustin"
+  },
+  {
+    "hourSalary": 17.0,
+    "tips": 0.0,
+    "name": "Matias",
+    "lastName": "Fierro",
+    "dateOfBrith": "1996-02-23",
+    "id": 39455959,
+    "isWorking": false,
+    "password": "ebfe@45",
+    "userName": "serverMatias"
+  }
+]
