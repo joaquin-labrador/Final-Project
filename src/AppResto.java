@@ -1,5 +1,6 @@
 import Employee.Employee;
 import Files.EmployeeFile;
+import Restaurant.Lounge;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 public final class AppResto {
     private String restoName;
     private List<Employee> restoEmployee = new ArrayList<>();
+    private Lounge lounge = new Lounge();
     private final EmployeeFile employeeFile = new EmployeeFile();
 
     public AppResto() throws IOException {
@@ -40,4 +42,9 @@ public final class AppResto {
     public void showFile(){
         employeeFile.showFile();
     }
+
+    public void showAvailableTables(){
+
+    }
+
 }

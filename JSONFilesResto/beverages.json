@@ -1,0 +1,47 @@
+[
+  {
+    "price": 200.0,
+    "name": "Coca-Cola",
+    "stock": 100
+  },
+  {
+    "price": 200.0,
+    "name": "Sprite",
+    "stock": 55
+  },
+  {
+    "price": 200.0,
+    "name": "Fanta",
+    "stock": 70
+  },
+  {
+    "price": 250.0,
+    "name": "Coca-Cola Zero",
+    "stock": 100
+  },
+  {
+    "price": 250.0,
+    "name": "Sprite Zero",
+    "stock": 20
+  },
+  {
+    "price": 250.0,
+    "name": "Fanta Zero",
+    "stock": 10
+  },
+  {
+    "price": 500.0,
+    "name": "Vino Tinto de la casa",
+    "stock": 200
+  },
+  {
+    "price": 500.0,
+    "name": "Vino Blanco de la casa",
+    "stock": 200
+  },
+  {
+    "price": 300.0,
+    "name": "Cerveza quilmes",
+    "stock": 250
+  }
+]

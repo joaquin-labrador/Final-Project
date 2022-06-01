@@ -1,0 +1,26 @@
+[
+  {
+    "price": 450.0,
+    "name": "Tortilla de papa"
+  },
+  {
+    "price": 500.0,
+    "name": "Bife con pure de papa"
+  },
+  {
+    "price": 300.0,
+    "name": "Papas fritas"
+  },
+  {
+    "price": 400.0,
+    "name": "Papas fritas con queso cheddar"
+  },
+  {
+    "price": 600.0,
+    "name": "Milanesa de Pollo con pure de papa"
+  },
+  {
+    "price": 700.0,
+    "name": "Costillitas de cerdo a la barbacoa"
+  }
+]

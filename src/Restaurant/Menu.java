@@ -5,14 +5,14 @@ import java.util.List;
 
 public class Menu {
     private double price;
-    private List<Food>  ingredients = new ArrayList<>();
+    private String name;
 
     public Menu() {
     }
 
-    public Menu(double price, List<Food> ingredients) {
+    public Menu(double price, String name) {
         this.price = price;
-        this.ingredients = ingredients;
+        this.name = name;
     }
 
     public double getPrice() {
@@ -23,11 +23,7 @@ public class Menu {
         this.price = price;
     }
 
-    public List<Food> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Food> ingredients) {
-        this.ingredients = ingredients;
+    public void setName(String name) {
+        this.name = name;
     }
 }

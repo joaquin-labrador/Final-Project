@@ -7,14 +7,14 @@ public class Food {
     private String food;
     private UUID idFood;
     private int stock;
-    private LocalDate expirationDate;
+    private String expirationDate;
 
     public Food() {
     }
 
-    public Food(String food, UUID idFood, int stock, LocalDate expirationDate) {
+    public Food(String food,  int stock, String expirationDate) {
         this.food = food;
-        this.idFood = idFood;
+        this.idFood = UUID.randomUUID();
         this.stock = stock;
         this.expirationDate = expirationDate;
     }
@@ -43,11 +43,11 @@ public class Food {
         this.stock = stock;
     }
 
-    public LocalDate getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
 }

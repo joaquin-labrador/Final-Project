@@ -1,0 +1,38 @@
+[
+  {
+    "food": "potato",
+    "idFood": "02ccab69-c596-4d24-8cc8-6414abe4bff0",
+    "stock": 300,
+    "expirationDate": "2022-11-09"
+  },
+  {
+    "food": "tomato",
+    "idFood": "8ca4b441-6cb8-4650-b0ab-4b9398edbf82",
+    "stock": 454,
+    "expirationDate": "2022-08-08"
+  },
+  {
+    "food": "tuna",
+    "idFood": "5dbb5898-75c2-4ec1-a8a7-b16ddc33a7ed",
+    "stock": 340,
+    "expirationDate": "2023-10-10"
+  },
+  {
+    "food": "beef",
+    "idFood": "d26104e3-3e7b-4d1c-a708-609c56ae8aa4",
+    "stock": 110,
+    "expirationDate": "2026-01-07"
+  },
+  {
+    "food": "chicken",
+    "idFood": "b7d95225-a346-4913-a7b2-ca4f89e0b225",
+    "stock": 700,
+    "expirationDate": "2023-03-29"
+  },
+  {
+    "food": "pork",
+    "idFood": "d617cbeb-8af0-4c33-aef9-da9d39f20e97",
+    "stock": 380,
+    "expirationDate": "2024-06-14"
+  }
+]
