@@ -26,4 +26,9 @@ public class Menu {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Menu{" + "price=" + price + ", name=" + name + '}';
+    }
 }

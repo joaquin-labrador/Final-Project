@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 
-public class Employee {
+public abstract class Employee {
     private String name;
     private String lastName;
     private String dateOfBrith;

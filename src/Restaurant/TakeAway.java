@@ -41,4 +41,13 @@ public class TakeAway {
     public void setTakeAwayFood(List<Menu> takeAwayFood) {
         this.takeAwayFood = takeAwayFood;
     }
+
+    @Override
+    public String toString() {
+        return "TakeAway{" +
+                "address='" + address + '\'' +
+                ", isDelivered=" + isDelivered +
+                ", takeAwayFood=" + takeAwayFood +
+                '}';
+    }
 }
