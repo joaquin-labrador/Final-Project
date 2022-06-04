@@ -1,6 +1,7 @@
 import Employee.Employee;
 import Files.EmployeeFile;
-import Restaurant.Lounge;
+import Files.RestoFiles;
+import Restaurant.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,18 +10,48 @@ import java.util.List;
 public final class AppResto {
     private String restoName;
     private List<Employee> restoEmployee = new ArrayList<>();
-    private Lounge lounge = new Lounge();
+    private List<Beverages> beveragesList = new ArrayList<>();
+    private List<Food> foodList = new ArrayList<>();
+    private List<Menu> menuList = new ArrayList<>();
+    private List<Table> tableList = new ArrayList<>();
     private final EmployeeFile employeeFile = new EmployeeFile();
+    private final RestoFiles restoFiles = new RestoFiles();
+    private final Lounge lounge = new Lounge();
 
     public AppResto() throws IOException {
         this.restoEmployee = employeeFile.getEmployeeList();
-
+        this.beveragesList = restoFiles.getBeveragesList();
+        this.foodList = restoFiles.getFoodList();
+        this.menuList = restoFiles.getMenuList();
+        this.tableList = restoFiles.getTableList();
     }
 
     public AppResto(String restoName) throws IOException {
         this.restoName = restoName;
         this.restoEmployee = employeeFile.getEmployeeList();
+        this.beveragesList = restoFiles.getBeveragesList();
+        this.foodList = restoFiles.getFoodList();
+        this.menuList = restoFiles.getMenuList();
+        this.tableList = restoFiles.getTableList();
 
+
+    }
+
+
+    public List<Beverages> getBeveragesList() {
+        return beveragesList;
+    }
+
+    public List<Food> getFoodList() {
+        return foodList;
+    }
+
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public List<Table> getTableList() {
+        return tableList;
     }
 
     public void setRestoName(String restoName) {
@@ -46,5 +77,6 @@ public final class AppResto {
     public void showAvailableTables(){
 
     }
+
 
 }

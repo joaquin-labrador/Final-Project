@@ -36,4 +36,8 @@ public class Table {
     public void setAvailable(boolean available) {
         isAvailable = available;
     }
+    @Override
+    public String toString() {
+        return "Table{" + "number=" + number + ", capacity=" + capacity + ", isAvailable=" + isAvailable + '}';
+    }
 }

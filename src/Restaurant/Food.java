@@ -50,4 +50,9 @@ public class Food {
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }
+
+    @Override
+    public String toString() {
+        return "Food{" + "food=" + food + ", idFood=" + idFood + ", stock=" + stock + ", expirationDate=" + expirationDate + '}';
+    }
 }

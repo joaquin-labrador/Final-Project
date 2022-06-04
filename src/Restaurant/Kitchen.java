@@ -32,4 +32,9 @@ public class Kitchen {
     public void setFoodList(List<Food> foodList) {
         this.foodList = foodList;
     }
+
+    @Override
+    public String toString() {
+        return "Kitchen{" + "KitchenEmployee=" + KitchenEmployee + ", foodList=" + foodList + '}';
+    }
 }
