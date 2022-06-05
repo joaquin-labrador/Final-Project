@@ -46,4 +46,10 @@ public class Server extends Employee {
                 ", tips=" + tips + "\n" +
                 '}';
     }
+
+    public void menuServer(){
+        System.out.println("Menu Server in progress");
+
+    }
+
 }

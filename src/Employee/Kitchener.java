@@ -28,6 +28,11 @@ public class Kitchener extends Employee{
                 "hourSalary=" + hourSalary  + "\n" +
                 '}';
     }
+    public void menuKitchener(){
+        System.out.println("Menu Kitchener in progress");
+
+    }
+
 
 
 }

@@ -43,4 +43,10 @@ public class Manager extends Employee{
                 ", inEmergency=" + inEmergency + "\n" +
                 '}';
     }
+
+    public void menuManager(){
+        System.out.println("Menu Manager in progress");
+
+    }
+
 }

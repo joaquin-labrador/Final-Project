@@ -39,5 +39,9 @@ public class Chef extends Employee{
                 ", inEmergency=" + inEmergency + "\n" +
                 '}';
     }
+    public void menuChef(){
+        System.out.println("Menu Chef in progress");
+
+    }
 
 }
