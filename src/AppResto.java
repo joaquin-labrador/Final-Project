@@ -1,4 +1,4 @@
-import Employee.Employee;
+import Employee.*;
 import Files.EmployeeFile;
 import Files.RestoFiles;
 import Restaurant.*;
@@ -77,6 +77,41 @@ public final class AppResto {
     public void showAvailableTables(){
 
     }
+
+    public Employee signIn(String userName, String password) throws IOException {
+        for (Employee employee : restoEmployee) {
+            if (employee.getUserName().equals(userName) && employee.getPassword().equals(password)) {
+                System.out.println("Bienvenido " + employee.getName() + " " + employee.getLastName());
+                return employee;
+            }
+        }
+        System.out.println("Usuario o contraseña incorrectos");
+        return null;
+    }
+
+    public void userOptions(Employee user){
+        if(user instanceof Kitchener){
+            Kitchener userKitchener = (Kitchener) user;
+            userKitchener.menuKitchener();
+        }
+        if(user instanceof Host){
+            Host userHost = (Host) user;
+            userHost.menuHost();
+        }
+        if(user instanceof Server){
+            Server userServer = (Server) user;
+            userServer.menuServer();
+        }
+        if(user instanceof Manager){
+            Manager userManager = (Manager) user;
+            userManager.menuManager();
+        }
+        if(user instanceof Chef){
+            Chef userChef = (Chef) user;
+            userChef.menuChef();
+        }
+    }
+
 
 
 }
