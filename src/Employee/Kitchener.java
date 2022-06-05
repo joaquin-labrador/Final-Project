@@ -1,8 +1,12 @@
 package Employee;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
-public class Kitchener extends Employee{
+import static java.lang.System.exit;
+
+public class Kitchener extends Employee
+        implements Menus , EmployeeTask {
     private double hourSalary;
 
     public Kitchener() {
@@ -25,14 +29,44 @@ public class Kitchener extends Employee{
     @Override
     public String toString() {
         return super.toString() + "Kitchener{" +
-                "hourSalary=" + hourSalary  + "\n" +
+                "hourSalary=" + hourSalary + "\n" +
                 '}';
     }
-    public void menuKitchener(){
-        System.out.println("Menu Kitchener in progress");
+
+
+    @Override
+    public void showMenu() {
+        System.out.println("Selecciona una opcion: ");
+        System.out.println("1. Fichar entrada");
+        System.out.println("2. Fichar salida");
+        System.out.println("3. Salir");
 
     }
 
 
 
+    @Override
+    public void employeeOperations() {
+        int op;
+        Scanner sc = new Scanner(System.in);
+        do {
+            showMenu();
+            op = sc.nextInt();
+            switch (op) {
+                case 1:
+                    super.clockIn();
+                    System.out.println(toString());
+                    break;
+                case 2:
+                    super.clockOut();
+                    System.out.println(toString());
+                    break;
+                case 3:
+                    exit(0);
+                    break;
+
+
+            }
+        } while (op == 1 || op == 2); //While para que el usuario seleccione una opcion valida
+    }
 }

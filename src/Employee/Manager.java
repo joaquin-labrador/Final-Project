@@ -2,7 +2,7 @@ package Employee;
 
 import java.time.LocalDate;
 
-public class Manager extends Employee{
+public class Manager extends Employee implements Menus {
     private Double hourSalary;
     private Boolean inEmergency = false;
 
@@ -29,11 +29,9 @@ public class Manager extends Employee{
         return inEmergency;
     }
 
-    public void setInEmergency( ) {
+    public void setInEmergency() {
         this.inEmergency = true;
     }
-
-
 
 
     @Override
@@ -44,9 +42,8 @@ public class Manager extends Employee{
                 '}';
     }
 
-    public void menuManager(){
+    @Override
+    public void showMenu() {
         System.out.println("Menu Manager in progress");
-
     }
-
 }

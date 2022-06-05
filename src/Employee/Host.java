@@ -4,7 +4,7 @@ import Employee.Employee;
 
 import java.time.LocalDate;
 
-public class Host extends Employee {
+public class Host extends Employee implements Menus {
 
 
     private double hourSalary;
@@ -44,8 +44,10 @@ public class Host extends Employee {
                 ", tips=" + tips + "\n" +
                 '}';
     }
-    public void menuHost(){
-        System.out.println("Menu Host in progress");
 
+
+    @Override
+    public void showMenu() {
+        System.out.println("Menu Host in progress");
     }
 }

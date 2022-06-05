@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 
-public abstract class Employee {
+public abstract class Employee                                                      {
     private String name;
     private String lastName;
     private String dateOfBrith;
@@ -86,15 +86,22 @@ public abstract class Employee {
 
     //endregion
 
-    private void startDay() {
+    public void startDay() {
         this.isWorking = true;
     }
 
    // protected abstract void finishDay(); //Here finish day and upload the salary of that working day, depends of position
 
-    private int getAge() {
+    public int getAge() {
         LocalDate dateOfBirth = LocalDate.parse(this.dateOfBrith);
         return (int) ChronoUnit.YEARS.between(dateOfBirth, LocalDate.now());
+    }
+
+    public void clockIn() {
+        this.isWorking = true;
+    }
+    public void clockOut() {
+        this.isWorking = false;
     }
 
     @Override
