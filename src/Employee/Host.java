@@ -44,4 +44,8 @@ public class Host extends Employee {
                 ", tips=" + tips + "\n" +
                 '}';
     }
+    public void menuHost(){
+        System.out.println("Menu Host in progress");
+
+    }
 }
