@@ -1,8 +1,11 @@
 package Employee;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
-public class Manager extends Employee implements Menus {
+import static java.lang.System.exit;
+
+public class Manager extends Employee implements Menus, EmployeeTask {
     private Double hourSalary;
     private Boolean inEmergency = false;
 
@@ -44,6 +47,42 @@ public class Manager extends Employee implements Menus {
 
     @Override
     public void showMenu() {
-        System.out.println("Menu Manager in progress");
+        System.out.println("1. Fichar entrada");
+        System.out.println("2. Fichar salida");
+        System.out.println("3. Reservar mesa");
+        System.out.println("4. Agregar empleados");
+        System.out.println("5. Editar precios");
+        System.out.println("6. Agregar platos");
+        System.out.println("7. Ver cuanta mesa");
+        System.out.println("8. Cancelar reserva");
+        System.out.println("9. Salir");
+
+    }
+
+    @Override
+    public void employeeOperations() {
+        int op;
+        Scanner sc = new Scanner(System.in);
+        do {
+            showMenu();
+            op = sc.nextInt();
+            switch (op) {
+                case 1 -> {
+                    super.clockIn();
+                    System.out.println(toString());
+                }
+                case 2 -> {
+                    super.clockOut();
+                    System.out.println(toString());
+                }
+                case 3 -> System.out.println("En desarrollo");
+                case 4 -> System.out.println("En desarrollo");
+                case 5 -> System.out.println("En desarrollo");
+                case 6 -> System.out.println("En desarrollo");
+                case 7 -> System.out.println("En desarrollo");
+                case 8 -> System.out.println("En desarrollo");
+                case 9 -> exit(0);
+            }
+        } while (op > 0 && op < 10);
     }
 }

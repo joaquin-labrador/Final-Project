@@ -2,7 +2,7 @@ package Employee;
 
 import java.time.LocalDate;
 
-public class Chef extends Employee implements Menus {
+public class Chef extends Employee implements Menus, EmployeeTask {
     private double hourSalary;
     private boolean inEmergency = false;
 
@@ -43,5 +43,10 @@ public class Chef extends Employee implements Menus {
     @Override
     public void showMenu() {
             System.out.println("Menu Chef in progress");
+    }
+
+    @Override
+    public void employeeOperations() {
+
     }
 }

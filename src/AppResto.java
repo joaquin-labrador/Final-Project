@@ -90,25 +90,20 @@ public final class AppResto {
     }
 
     public void userOptions(Employee user){
-        if(user instanceof Kitchener){
-            Kitchener userKitchener = (Kitchener) user;
+        if(user instanceof Kitchener userKitchener){
             userKitchener.employeeOperations();
         }
-        if(user instanceof Host){
-            Host userHost = (Host) user;
-            userHost.showMenu();
+        if(user instanceof Host userHost){
+            userHost.employeeOperations();
         }
-        if(user instanceof Server){
-            Server userServer = (Server) user;
-            userServer.showMenu();
+        if(user instanceof Server userServer){
+            userServer.employeeOperations();
         }
-        if(user instanceof Manager){
-            Manager userManager = (Manager) user;
-            userManager.showMenu();
+        if(user instanceof Manager userManager){
+            userManager.employeeOperations();
         }
-        if(user instanceof Chef){
-            Chef userChef = (Chef) user;
-            userChef.showMenu();
+        if(user instanceof Chef userChef){
+            userChef.employeeOperations();
         }
     }
 
