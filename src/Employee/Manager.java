@@ -72,7 +72,6 @@ public class Manager extends Employee implements Menus, EmployeeTask {
     }
 
 
-
     @Override
     public void employeeOperations() {
         int op;
@@ -84,18 +83,26 @@ public class Manager extends Employee implements Menus, EmployeeTask {
                 case 1 -> {
                     super.clockIn();
                     System.out.println(toString());
+                    break;
                 }
                 case 2 -> {
                     super.clockOut();
                     System.out.println(toString());
+                    break;
                 }
-                case 3 -> lounge.reserveTable();
-                case 4 -> System.out.println("En desarrollo");
-                case 5 -> System.out.println("En desarrollo");
-                case 6 -> System.out.println("En desarrollo");
-                case 7 -> System.out.println("En desarrollo");
-                case 8 -> System.out.println("En desarrollo");
-                case 9 -> System.out.println(lounge.getTables().toString());
+                case 3 -> {
+                    lounge.reserveTable();
+                    break;
+                }
+                case 4, 5, 6, 7, 8 -> {
+                    System.out.println("En desarrollo");
+                    break;
+                }
+                case 9 -> {
+                    System.out.println(lounge.getTables().toString());
+                    break;
+                }
+
                 case 10 -> exit(0);
             }
         } while (op > 0 && op < 11);

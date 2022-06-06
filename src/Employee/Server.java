@@ -79,8 +79,10 @@ public class Server extends Employee
                     break;
                 case 3:
                     System.out.println("En desarrollo");
+                    break;
                 case 4:
                     System.out.println("En desarrollo");
+                    break;
                 case 5:
                     exit(0);
                     break;

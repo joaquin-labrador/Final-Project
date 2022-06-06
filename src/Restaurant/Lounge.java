@@ -2,7 +2,9 @@ package Restaurant;
 
 import Employee.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -67,43 +69,57 @@ public class Lounge implements LoungueTask {
 
     @Override
     public void reserveTable() {
-        boolean isBooking;
+        boolean isBooking = false;
         Scanner sc = new Scanner(System.in);
+        int table = 0;
+        int people = 0;
+        int op = 0;
         do {
-            System.out.println("Ingrese el numero de la mesa a reservar : ");
-            int table = sc.nextInt();
-            System.out.println("Ingrese la cantidad de comensales : ");
-            int people = sc.nextInt();
-            isBooking = bookTable(table, people);
-            if (!isBooking) {
-                System.out.println("La mesa no se puede reservar");
-                System.out.println("Desea no reservar otra mesa? (1. Si / 2. No)");
-                int op = sc.nextInt();
-                if (op == 2) {
-                    isBooking = true;
+            try {
+                System.out.println("Ingrese el numero de la mesa a reservar : ");
+                table = sc.nextInt();
+                System.out.println("Ingrese la cantidad de comensales : ");
+                people = sc.nextInt();
+                isBooking = bookTable(table, people);
+            } catch (InputMismatchException e) {
+                System.out.println("Error ingresaste un caracter no valido");
+                isBooking = true;
+            }finally {
+                if (isBooking) {
+                    try {
+                        System.out.println("Desea no reservar otra mesa? (Ingrese 1 para otra reservar otra mesa)");
+                        op = sc.nextInt();
+                        if (op != 1) {
+                            isBooking = false;
+                        }
+                    } catch (InputMismatchException e) {
+                        System.out.println("Error ingresaste un caracter no valido");
+                    }
                 }
             }
-        } while (!isBooking);
-    }
+
+
+    } while(!isBooking);
+}
 
     @Override
     public boolean bookTable(int tableNumber, int capacity) {
         if (tableNumber > 0 && tableNumber <= tables.size()) {
             for (Table table : tables) {
-                if (table.getNumber() == tableNumber  && table.getCapacity() <= capacity) {
+                if (table.getNumber() == tableNumber && table.getCapacity() >= capacity) {
                     if (table.isAvailable()) {
                         table.setOccupied();
-                        System.out.println("Table " + tableNumber + " is occupied");
+                        System.out.println("Mesa " + tableNumber + " reservada");
                         return true;
                     } else {
-                        if(table.getCapacity() > capacity)
-                            System.out.println("Not enough capacity");
-                        System.out.println("Table " + tableNumber + " is not available");
+                        if (table.getCapacity() > capacity)
+                            System.out.println("La mesa " + tableNumber + " tiene una capacidad de " + table.getCapacity() + " personas");
+                        System.out.println("Table " + tableNumber + " ya esta ocupada");
                         return false;
                     }
                 }
             }
-        }else
+        } else
             System.out.println("Table not found");
         return false;
     }

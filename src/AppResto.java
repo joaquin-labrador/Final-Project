@@ -95,10 +95,10 @@ public final class AppResto {
         if(user instanceof Kitchener userKitchener){
             userKitchener.employeeOperations();
         }
-        if(user instanceof Host userHost){
+        else if(user instanceof Host userHost){
             userHost.employeeOperations();
         }
-        if(user instanceof Server userServer){
+        else if(user instanceof Server userServer){
             userServer.employeeOperations();
         }
         if(user instanceof Manager userManager){
