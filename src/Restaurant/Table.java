@@ -32,9 +32,12 @@ public class Table {
     public boolean isAvailable() {
         return isAvailable;
     }
+    public void setOccupied() {
+        this.isAvailable = false;
+    }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public void setAvailable( ) {
+        isAvailable = true;
     }
     @Override
     public String toString() {

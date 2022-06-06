@@ -1,5 +1,7 @@
 package Employee;
 
+import Restaurant.Lounge;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -8,6 +10,8 @@ import static java.lang.System.exit;
 public class Manager extends Employee implements Menus, EmployeeTask {
     private Double hourSalary;
     private Boolean inEmergency = false;
+
+    private Lounge lounge;
 
 
     public Manager() {
@@ -36,6 +40,13 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         this.inEmergency = true;
     }
 
+    public void setLounge(Lounge lounge) {
+        this.lounge = lounge;
+    }
+
+    public Lounge getLounge() {
+        return lounge;
+    }
 
     @Override
     public String toString() {
@@ -55,9 +66,12 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         System.out.println("6. Agregar platos");
         System.out.println("7. Ver cuanta mesa");
         System.out.println("8. Cancelar reserva");
-        System.out.println("9. Salir");
+        System.out.println("9. Ver mesas");
+        System.out.println("10. Salir");
 
     }
+
+
 
     @Override
     public void employeeOperations() {
@@ -75,14 +89,15 @@ public class Manager extends Employee implements Menus, EmployeeTask {
                     super.clockOut();
                     System.out.println(toString());
                 }
-                case 3 -> System.out.println("En desarrollo");
+                case 3 -> lounge.reserveTable();
                 case 4 -> System.out.println("En desarrollo");
                 case 5 -> System.out.println("En desarrollo");
                 case 6 -> System.out.println("En desarrollo");
                 case 7 -> System.out.println("En desarrollo");
                 case 8 -> System.out.println("En desarrollo");
-                case 9 -> exit(0);
+                case 9 -> System.out.println(lounge.getTables().toString());
+                case 10 -> exit(0);
             }
-        } while (op > 0 && op < 10);
+        } while (op > 0 && op < 11);
     }
 }

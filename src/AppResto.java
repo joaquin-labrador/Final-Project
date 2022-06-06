@@ -16,7 +16,7 @@ public final class AppResto {
     private List<Table> tableList = new ArrayList<>();
     private final EmployeeFile employeeFile = new EmployeeFile();
     private final RestoFiles restoFiles = new RestoFiles();
-    private final Lounge lounge = new Lounge();
+    private Lounge lounge = new Lounge();
 
     public AppResto() throws IOException {
         this.restoEmployee = employeeFile.getEmployeeList();
@@ -24,6 +24,7 @@ public final class AppResto {
         this.foodList = restoFiles.getFoodList();
         this.menuList = restoFiles.getMenuList();
         this.tableList = restoFiles.getTableList();
+        this.lounge  = new Lounge(restoEmployee, tableList, menuList, beveragesList);
     }
 
     public AppResto(String restoName) throws IOException {
@@ -33,6 +34,7 @@ public final class AppResto {
         this.foodList = restoFiles.getFoodList();
         this.menuList = restoFiles.getMenuList();
         this.tableList = restoFiles.getTableList();
+        this.lounge  = new Lounge(restoEmployee, tableList, menuList, beveragesList);
 
 
     }
@@ -100,6 +102,7 @@ public final class AppResto {
             userServer.employeeOperations();
         }
         if(user instanceof Manager userManager){
+            userManager.setLounge(lounge);
             userManager.employeeOperations();
         }
         if(user instanceof Chef userChef){

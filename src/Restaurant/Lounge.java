@@ -1,11 +1,12 @@
 package Restaurant;
 
-import Employee.Employee;
+import Employee.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Lounge {
+public class Lounge implements LoungueTask {
     private List<Employee> employees = new ArrayList<>();
     private List<Table> tables = new ArrayList<>();
     private List<Menu> menu = new ArrayList<>();
@@ -42,7 +43,6 @@ public class Lounge {
     }
 
 
-
     public void setMenu(List<Menu> menu) {
         this.menu = menu;
     }
@@ -63,5 +63,48 @@ public class Lounge {
                 ", menu=" + menu +
                 ", beverages=" + beverages +
                 '}';
+    }
+
+    @Override
+    public void reserveTable() {
+        boolean isBooking;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("Ingrese el numero de la mesa a reservar : ");
+            int table = sc.nextInt();
+            System.out.println("Ingrese la cantidad de comensales : ");
+            int people = sc.nextInt();
+            isBooking = bookTable(table, people);
+            if (!isBooking) {
+                System.out.println("La mesa no se puede reservar");
+                System.out.println("Desea no reservar otra mesa? (1. Si / 2. No)");
+                int op = sc.nextInt();
+                if (op == 2) {
+                    isBooking = true;
+                }
+            }
+        } while (!isBooking);
+    }
+
+    @Override
+    public boolean bookTable(int tableNumber, int capacity) {
+        if (tableNumber > 0 && tableNumber <= tables.size()) {
+            for (Table table : tables) {
+                if (table.getNumber() == tableNumber  && table.getCapacity() <= capacity) {
+                    if (table.isAvailable()) {
+                        table.setOccupied();
+                        System.out.println("Table " + tableNumber + " is occupied");
+                        return true;
+                    } else {
+                        if(table.getCapacity() > capacity)
+                            System.out.println("Not enough capacity");
+                        System.out.println("Table " + tableNumber + " is not available");
+                        return false;
+                    }
+                }
+            }
+        }else
+            System.out.println("Table not found");
+        return false;
     }
 }
