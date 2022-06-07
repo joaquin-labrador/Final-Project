@@ -84,7 +84,7 @@ public class Lounge implements LoungueTask {
             } catch (InputMismatchException e) {
                 System.out.println("Error ingresaste un caracter no valido");
                 isBooking = true;
-            }finally {
+            } finally {
                 if (isBooking) {
                     try {
                         System.out.println("Desea no reservar otra mesa? (Ingrese 1 para otra reservar otra mesa)");
@@ -99,8 +99,8 @@ public class Lounge implements LoungueTask {
             }
 
 
-    } while(!isBooking);
-}
+        } while (!isBooking);
+    }
 
     @Override
     public boolean bookTable(int tableNumber, int capacity) {
@@ -123,4 +123,6 @@ public class Lounge implements LoungueTask {
             System.out.println("Table not found");
         return false;
     }
+
+
 }

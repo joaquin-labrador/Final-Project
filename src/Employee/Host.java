@@ -20,6 +20,7 @@ public class Host extends Employee implements Menus, EmployeeTask {
     public Host(String name, String lastName, String dateOfBrith, Integer id, String userName, String password, double hourSalary) {
         super(name, lastName, dateOfBrith, id, userName, password);
         this.hourSalary = hourSalary;
+        this.tips = 0;
     }
 
 

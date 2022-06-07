@@ -91,7 +91,7 @@ public final class AppResto {
         return null;
     }
 
-    public void userOptions(Employee user){
+    public void userOptions(Employee user) throws IOException {
         if(user instanceof Kitchener userKitchener){
             userKitchener.employeeOperations();
         }

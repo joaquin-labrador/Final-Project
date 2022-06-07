@@ -80,10 +80,7 @@ public class RestoFiles implements FilesOperations {
         return tableList;
     }
 
-    @Override
-    public void writeFile() {
 
-    }
 
     @Override
     public void showFile() {
