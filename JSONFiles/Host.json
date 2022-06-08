@@ -9,5 +9,16 @@
     "isWorking": false,
     "password": "23123423Hb2343",
     "userName": "hostSantiago"
+  },
+  {
+    "hourSalary": 25.0,
+    "tips": 0.0,
+    "name": "Kevin",
+    "lastName": "Reynoso",
+    "dateOfBrith": "1999-03-09",
+    "id": 43567798,
+    "isWorking": false,
+    "password": "123",
+    "userName": "kevin"
   }
 ]

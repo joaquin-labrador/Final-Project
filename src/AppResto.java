@@ -103,6 +103,7 @@ public final class AppResto {
         }
         if(user instanceof Manager userManager){
             userManager.setLounge(lounge);
+            userManager.setMyEmployeeList(restoEmployee);
             userManager.employeeOperations();
         }
         if(user instanceof Chef userChef){

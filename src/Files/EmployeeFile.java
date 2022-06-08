@@ -16,6 +16,8 @@ public class EmployeeFile implements FilesOperations {
 
     WriteNewEmployees writeNewEmployees = new WriteNewEmployees();
 
+    DeleteEmployee deleteEmployee = new DeleteEmployee();
+
     public EmployeeFile() throws IOException {
         readFile();
     }
@@ -117,20 +119,50 @@ public class EmployeeFile implements FilesOperations {
         }
     }
 
-        @Override
-        public void showFile () {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            BufferedReader reader = null;
-            try {
-                reader = new BufferedReader(new FileReader("JSONFiles\\Manager.json"));
-                reader.toString();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public void deleteEmployee(Employee employeeToDelete) {
+        BufferedReader reader;
+        BufferedWriter exit;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        exit = null;
+        reader = null;
+        List<Manager> managerListAux = new ArrayList<>();
+        List<Chef> chefListAux = new ArrayList<>();
+        List<Kitchener> kitchenerListAux = new ArrayList<>();
+        List<Server> serverListAux = new ArrayList<>();
+        List<Host> hostListAux = new ArrayList<>();
+        if (employeeToDelete instanceof Manager manager) {
+            deleteEmployee.deleteManager(reader, exit, gson, manager, managerListAux);
+        }
+        else if (employeeToDelete instanceof Chef chef) {
+            deleteEmployee.deleteChef(reader, exit, gson, chef, chefListAux);
+        }
+        else if (employeeToDelete instanceof Kitchener Kitchener) {
+            deleteEmployee.deleteKitchener(reader, exit, gson, Kitchener, kitchenerListAux);
+        }
+        else if (employeeToDelete instanceof Server server) {
+            deleteEmployee.deleteServer(reader, exit, gson, server, serverListAux);
+        }
+        else if (employeeToDelete instanceof Host host) {
+            deleteEmployee.deleteHost(reader, exit, gson, host, hostListAux);
         }
 
-        public List<Employee> getEmployeeList () {
-            return employeeList;
+
+    }
+
+    @Override
+    public void showFile() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("JSONFiles\\Manager.json"));
+            reader.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+}

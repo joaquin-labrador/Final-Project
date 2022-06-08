@@ -9,16 +9,5 @@
     "isWorking": false,
     "password": "34324esds3",
     "userName": "managerMaximo"
-  },
-  {
-    "hourSalary": 25.0,
-    "inEmergency": false,
-    "name": "Kevin",
-    "lastName": "Reynoso",
-    "dateOfBrith": "1999-03-09",
-    "id": 43567798,
-    "isWorking": false,
-    "password": "123",
-    "userName": "kevin"
   }
 ]
