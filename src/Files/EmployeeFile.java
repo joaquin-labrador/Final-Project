@@ -57,12 +57,22 @@ public class EmployeeFile implements FilesOperations {
             hostListAux = gson.fromJson(readerHost,
                     (new TypeToken<List<Host>>() {
                     }.getType()));
+            if(managerListAux != null) {
+                employeeList.addAll(managerListAux);
+            }
+            if(chefListAux != null) {
+                employeeList.addAll(chefListAux);
+            }
+            if(kitchenerListAux != null) {
+                employeeList.addAll(kitchenerListAux);
+            }
+            if(serverListAux != null) {
+                employeeList.addAll(serverListAux);
+            }
+            if(hostListAux != null) {
+                employeeList.addAll(hostListAux);
+            }
 
-            this.employeeList.addAll(managerListAux);
-            this.employeeList.addAll(chefListAux);
-            this.employeeList.addAll(kitchenerListAux);
-            this.employeeList.addAll(serverListAux);
-            this.employeeList.addAll(hostListAux);
             //endregion
         } catch (IOException e) {
             System.out.println("File read Error\n");
