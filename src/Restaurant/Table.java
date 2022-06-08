@@ -1,5 +1,7 @@
 package Restaurant;
 
+import java.util.Objects;
+
 public class Table {
     private int number;
     private int capacity;
@@ -42,5 +44,18 @@ public class Table {
     @Override
     public String toString() {
         return "Table{" + "number=" + number + ", capacity=" + capacity + ", isAvailable=" + isAvailable + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Table)) return false;
+        Table table = (Table) o;
+        return getNumber() == table.getNumber();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getNumber());
     }
 }

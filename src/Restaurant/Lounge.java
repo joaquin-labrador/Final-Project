@@ -3,21 +3,18 @@ package Restaurant;
 import Employee.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Lounge implements LoungueTask {
     private List<Employee> employees = new ArrayList<>();
-    private List<Table> tables = new ArrayList<>();
+    private Map<Integer, Table> tables = new HashMap<>();
     private List<Menu> menu = new ArrayList<>();
     private List<Beverages> beverages = new ArrayList<>();
 
     public Lounge() {
     }
 
-    public Lounge(List<Employee> employees, List<Table> tables, List<Menu> menu, List<Beverages> beverages) {
+    public Lounge(List<Employee> employees, Map<Integer, Table> tables, List<Menu> menu, List<Beverages> beverages) {
         this.employees = employees;
         this.tables = tables;
         this.menu = menu;
@@ -32,11 +29,11 @@ public class Lounge implements LoungueTask {
         this.employees = employees;
     }
 
-    public List<Table> getTables() {
+    public Map<Integer, Table> getTables() {
         return tables;
     }
 
-    public void setTables(List<Table> tables) {
+    public void setTables(Map<Integer, Table> tables) {
         this.tables = tables;
     }
 
@@ -89,7 +86,7 @@ public class Lounge implements LoungueTask {
                     try {
                         System.out.println("Desea no reservar otra mesa? (Ingrese 1 para otra reservar otra mesa)");
                         op = sc.nextInt();
-                        if (op != 1) {
+                        if (op == 1) {
                             isBooking = false;
                         }
                     } catch (InputMismatchException e) {
@@ -105,16 +102,14 @@ public class Lounge implements LoungueTask {
     @Override
     public boolean bookTable(int tableNumber, int capacity) {
         if (tableNumber > 0 && tableNumber <= tables.size()) {
-            for (Table table : tables) {
-                if (table.getNumber() == tableNumber && table.getCapacity() >= capacity) {
-                    if (table.isAvailable()) {
-                        table.setOccupied();
-                        System.out.println("Mesa " + tableNumber + " reservada");
+            for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+                if (table.getValue().getNumber() == tableNumber) {
+                    if (table.getValue().getCapacity() >= capacity) {
+                        table.getValue().setCapacity(capacity);
+                        table.getValue().setOccupied();
                         return true;
                     } else {
-                        if (table.getCapacity() > capacity)
-                            System.out.println("La mesa " + tableNumber + " tiene una capacidad de " + table.getCapacity() + " personas");
-                        System.out.println("Table " + tableNumber + " ya esta ocupada");
+                        System.out.println("No hay suficiente capacidad para la cantidad de comensales");
                         return false;
                     }
                 }
