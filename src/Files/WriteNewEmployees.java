@@ -29,7 +29,6 @@ public class WriteNewEmployees {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println(managerListAux.toString());
             assert exit != null;
             try {
                 exit.close();
@@ -57,7 +56,6 @@ public class WriteNewEmployees {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println(chefListAux.toString());
             assert exit != null;
             try {
                 exit.close();
@@ -85,7 +83,6 @@ public class WriteNewEmployees {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println(kitchenerListAux.toString());
             assert exit != null;
             try {
                 exit.close();
@@ -112,7 +109,6 @@ public class WriteNewEmployees {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println(serverListAux.toString());
             assert exit != null;
             try {
                 exit.close();
@@ -139,7 +135,6 @@ public class WriteNewEmployees {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println(hostListAux.toString());
             assert exit != null;
             try {
                 exit.close();

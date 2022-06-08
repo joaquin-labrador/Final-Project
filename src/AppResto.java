@@ -5,7 +5,9 @@ import Restaurant.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class AppResto {
     private String restoName;
@@ -13,7 +15,7 @@ public final class AppResto {
     private List<Beverages> beveragesList = new ArrayList<>();
     private List<Food> foodList = new ArrayList<>();
     private List<Menu> menuList = new ArrayList<>();
-    private List<Table> tableList = new ArrayList<>();
+    private Map<Integer, Table> tableList = new HashMap<>();
     private final EmployeeFile employeeFile = new EmployeeFile();
     private final RestoFiles restoFiles = new RestoFiles();
     private Lounge lounge = new Lounge();
@@ -52,7 +54,7 @@ public final class AppResto {
         return menuList;
     }
 
-    public List<Table> getTableList() {
+    public Map<Integer, Table> getTableList() {
         return tableList;
     }
 
