@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WriteNewEmployees {
@@ -12,11 +13,14 @@ public class WriteNewEmployees {
     public WriteNewEmployees() {
     }
 
-    public void addManager(BufferedReader reader, BufferedWriter exit, Gson gson, Manager manager , List<Manager> managerListAux) {
+    public void addManager(BufferedReader reader, BufferedWriter exit, Gson gson, Manager manager, List<Manager> managerListAux) {
         try {
             reader = new BufferedReader(new FileReader("JSONFiles\\Manager.json"));
             managerListAux = gson.fromJson(reader, (new TypeToken<List<Manager>>() {
             }.getType()));
+            if (managerListAux == null) {
+                managerListAux = new ArrayList<>();
+            }
             managerListAux.add(manager);
             exit = new BufferedWriter(new FileWriter("JSONFiles\\Manager.json"));
             String json = gson.toJson(managerListAux, managerListAux.getClass());
@@ -36,11 +40,15 @@ public class WriteNewEmployees {
         }
     }
 
-    public void addChef (BufferedReader reader, BufferedWriter exit, Gson gson, Chef chef , List<Chef> chefListAux) {
+    public void addChef(BufferedReader reader, BufferedWriter exit, Gson gson, Chef chef, List<Chef> chefListAux) {
         try {
             reader = new BufferedReader(new FileReader("JSONFiles\\Chef.json"));
             chefListAux = gson.fromJson(reader, (new TypeToken<List<Chef>>() {
             }.getType()));
+
+            if (chefListAux == null) {
+                chefListAux = new ArrayList<>();
+            }
             chefListAux.add(chef);
             exit = new BufferedWriter(new FileWriter("JSONFiles\\Chef.json"));
             String json = gson.toJson(chefListAux, chefListAux.getClass());
@@ -60,11 +68,15 @@ public class WriteNewEmployees {
         }
     }
 
-    public void addKitchener (BufferedReader reader, BufferedWriter exit, Gson gson, Kitchener kitchener , List<Kitchener> kitchenerListAux) {
+    public void addKitchener(BufferedReader reader, BufferedWriter exit, Gson gson, Kitchener kitchener, List<Kitchener> kitchenerListAux) {
         try {
             reader = new BufferedReader(new FileReader("JSONFiles\\Kitchener.json"));
             kitchenerListAux = gson.fromJson(reader, (new TypeToken<List<Kitchener>>() {
             }.getType()));
+
+            if (kitchenerListAux == null) {
+                kitchenerListAux = new ArrayList<Kitchener>();
+            }
             kitchenerListAux.add(kitchener);
             exit = new BufferedWriter(new FileWriter("JSONFiles\\Kitchener.json"));
             String json = gson.toJson(kitchenerListAux, kitchenerListAux.getClass());
@@ -83,11 +95,15 @@ public class WriteNewEmployees {
             }
         }
     }
-    public void addServer (BufferedReader reader, BufferedWriter exit, Gson gson, Server server , List<Server> serverListAux) {
+
+    public void addServer(BufferedReader reader, BufferedWriter exit, Gson gson, Server server, List<Server> serverListAux) {
         try {
             reader = new BufferedReader(new FileReader("JSONFiles\\Servers.json"));
             serverListAux = gson.fromJson(reader, (new TypeToken<List<Server>>() {
             }.getType()));
+            if (serverListAux == null) {
+                serverListAux.add(server);
+            }
             serverListAux.add(server);
             exit = new BufferedWriter(new FileWriter("JSONFiles\\Servers.json"));
             String json = gson.toJson(serverListAux, serverListAux.getClass());
@@ -106,11 +122,15 @@ public class WriteNewEmployees {
             }
         }
     }
-    public void addHost (BufferedReader reader, BufferedWriter exit, Gson gson, Host host , List<Host> hostListAux) {
+
+    public void addHost(BufferedReader reader, BufferedWriter exit, Gson gson, Host host, List<Host> hostListAux) {
         try {
             reader = new BufferedReader(new FileReader("JSONFiles\\Host.json"));
             hostListAux = gson.fromJson(reader, (new TypeToken<List<Host>>() {
             }.getType()));
+            if (hostListAux == null) {
+                hostListAux = new ArrayList<>();
+            }
             hostListAux.add(host);
             exit = new BufferedWriter(new FileWriter("JSONFiles\\Host.json"));
             String json = gson.toJson(hostListAux, hostListAux.getClass());
