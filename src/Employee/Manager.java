@@ -127,72 +127,36 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         } while (op > 0 && op < 12);
     }
 
-    public void deleteEmployee(){
+    public void deleteEmployee() {
 
         Scanner sc = new Scanner(System.in);
 
-       try {
-           System.out.println("Ingrese el id del empleado que desea eliminar");
-           Integer id = sc.nextInt();
-           Employee employee = searchEmployee(id);
-           if (employee != null) {
-               EmployeeFile employeeFile = new EmployeeFile();
-               employeeFile.deleteEmployee(employee);
-               System.out.println("El empleado ha sido eliminado");
-           } else {
-               System.out.println("El empleado no existe");
-           }
-       } catch (Exception e) {
-           System.out.println("El id ingresado no es valido");
-       }
+        try {
+            System.out.println("Ingrese el id del empleado que desea eliminar");
+            Integer id = sc.nextInt();
+            Employee employee = searchEmployee(id);
+            if (employee != null) {
+                EmployeeFile employeeFile = new EmployeeFile();
+                employeeFile.deleteEmployee(employee);
+                System.out.println("El empleado ha sido eliminado");
+            } else {
+                System.out.println("El empleado no existe");
+            }
+        } catch (Exception e) {
+            System.out.println("El id ingresado no es valido");
+        }
     }
 
     public void addEmployee() throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println(menuEmployee());
-        int op = sc.nextInt();
+        Kitchener newEmployee = new Kitchener("Kevin", "Reynoso", LocalDate.of(1999, 3, 9).toString(),
+                43567798, "kevin", "123", Salarys.MANAGER.getSalary());
         try {
             EmployeeFile employeeFile = new EmployeeFile();
-            Host newEmployee = new Host("Kevin", "Reynoso", LocalDate.of(1999, 3, 9).toString(),
-                    43567798, "kevin", "123", Salarys.MANAGER.getSalary());
-            switch (op) {
-                case 1:
-                    employeeFile.writeFile(newEmployee);
-                    break;
-                case 2:
-                    employeeFile.writeFile(newEmployee);
-                    break;
-                case 3:
-                    employeeFile.writeFile(newEmployee);
-                    break;
-                case 4:
-                    employeeFile.writeFile(newEmployee);
-                    break;
-                case 5:
-                    employeeFile.writeFile(newEmployee);
-                    exit(0);
-
-            }
-
+            employeeFile.writeFile(newEmployee);
         } catch (IOException e) {
             System.out.println("Error al escribir en el archivo");
+            exit(0);
         }
-
-
-    }
-
-
-    public String menuEmployee() {
-        Scanner sc = new Scanner(System.in);
-        return """
-                Ingrese que tipo de empleado desea agregar:\s
-                1. Manager
-                2. Chef
-                3. Kitchener
-                4. Host
-                5. Server
-                6. Exit
-                """;
     }
 
 

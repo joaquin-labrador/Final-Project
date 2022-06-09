@@ -49,8 +49,7 @@ public class Table {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Table)) return false;
-        Table table = (Table) o;
+        if (!(o instanceof Table table)) return false;
         return getNumber() == table.getNumber();
     }
 
