@@ -14,6 +14,7 @@ public class Server extends Employee
 
     private double tips;
 
+    //region CONSTRUCTORS GETTERS AND SETTERS
     public Server() {
 
     }
@@ -40,7 +41,7 @@ public class Server extends Employee
     public void setTips(double tips) {
         this.tips = tips;
     }
-
+//endregion
 
     @Override
     public String toString() {

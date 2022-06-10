@@ -24,7 +24,7 @@ public class Manager extends Employee implements Menus, EmployeeTask {
 
     List<Employee> myEmployeeList;
 
-
+    //region CONSTRUCTORS GETTERS AND SETTERS
     public Manager() {
     }
 
@@ -66,6 +66,7 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         return employeeFile;
     }
 
+    //endregion
     public Employee searchEmployee(Integer id) {
         for (Employee employee : myEmployeeList) {
             if (employee.getId().equals(id)) {
@@ -111,8 +112,13 @@ public class Manager extends Employee implements Menus, EmployeeTask {
                 }
                 case 5 -> {
                     this.lounge.takeOrder();
+                    break;
                 }
-                case 6, 7, 8 -> {
+                case 6 -> {
+                    this.lounge.tableToCollect();
+                    break;
+                }
+                case 7, 8 -> {
                     System.out.println("En desarrollo");
                     break;
                 }
@@ -170,8 +176,8 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         System.out.println("3. Reservar mesa");
         System.out.println("4. Agregar empleados");
         System.out.println("5. Tomar pedidos");
-        System.out.println("6. Editar precios");
-        System.out.println("7. Ver cuanta mesa");
+        System.out.println("6. Cobrar mesa");
+        System.out.println("7. Editar precios");
         System.out.println("8. Cancelar reserva");
         System.out.println("9. Ver mesas");
         System.out.println("10. Eliminar empleado");

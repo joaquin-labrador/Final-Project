@@ -9,10 +9,11 @@ public class Food {
     private int stock;
     private String expirationDate;
 
+    //region CONSTRUCTORS GETTERS AND SETTERS
     public Food() {
     }
 
-    public Food(String food,  int stock, String expirationDate) {
+    public Food(String food, int stock, String expirationDate) {
         this.food = food;
         this.idFood = UUID.randomUUID();
         this.stock = stock;
@@ -51,6 +52,7 @@ public class Food {
         this.expirationDate = expirationDate;
     }
 
+    ///endregion
     @Override
     public String toString() {
         return "Food{" + "food=" + food + ", idFood=" + idFood + ", stock=" + stock + ", expirationDate=" + expirationDate + '}';

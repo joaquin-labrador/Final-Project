@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Kitchen {
-    private List <Employee> KitchenEmployee = new ArrayList<>();
-    private List <Food> foodList = new ArrayList<>();
+    private List<Employee> KitchenEmployee = new ArrayList<>();
+    private List<Food> foodList = new ArrayList<>();
 
+    //region CONSTRUCTORS GETTERS AND SETTERS
     public Kitchen() {
     }
 
@@ -33,6 +34,7 @@ public class Kitchen {
         this.foodList = foodList;
     }
 
+    //endregion
     @Override
     public String toString() {
         return "Kitchen{" + "KitchenEmployee=" + KitchenEmployee + ", foodList=" + foodList + '}';

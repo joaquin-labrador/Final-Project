@@ -10,6 +10,7 @@ public class Chef extends Employee implements Menus, EmployeeTask {
     private boolean inEmergency = false;
 
 
+    //region CONSTRUCTORS GETTERS AND SETTERS
     public Chef() {
     }
 
@@ -36,7 +37,7 @@ public class Chef extends Employee implements Menus, EmployeeTask {
     }
 
 
-
+    //endregion
 
 
     @Override

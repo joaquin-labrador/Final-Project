@@ -6,9 +6,10 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 
 public class Kitchener extends Employee
-        implements Menus , EmployeeTask {
+        implements Menus, EmployeeTask {
     private double hourSalary;
 
+    //region CONSTRUCTORS GETTERS AND SETTERS
     public Kitchener() {
     }
 
@@ -25,7 +26,7 @@ public class Kitchener extends Employee
         this.hourSalary = hourSalary;
     }
 
-
+    //endregion
     @Override
     public String toString() {
         return super.toString() + "Kitchener{" +
@@ -42,7 +43,6 @@ public class Kitchener extends Employee
         System.out.println("3. Salir");
 
     }
-
 
 
     @Override

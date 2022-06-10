@@ -23,9 +23,9 @@
     "isAvailable": true,
     "totalPrice": 0.0
   },
-  "216": {
-    "number": 8,
-    "capacity": 3,
+  "43": {
+    "number": 5,
+    "capacity": 4,
     "isAvailable": true,
     "totalPrice": 0.0
   },
@@ -41,9 +41,9 @@
     "isAvailable": true,
     "totalPrice": 0.0
   },
-  "43": {
-    "number": 5,
-    "capacity": 4,
+  "216": {
+    "number": 8,
+    "capacity": 3,
     "isAvailable": true,
     "totalPrice": 0.0
   }

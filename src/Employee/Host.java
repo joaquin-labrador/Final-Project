@@ -14,6 +14,7 @@ public class Host extends Employee implements Menus, EmployeeTask {
 
     private double tips;
 
+    // region CONSTRUCTORS GETTERS AND SETTERS
     public Host() {
     }
 
@@ -40,6 +41,7 @@ public class Host extends Employee implements Menus, EmployeeTask {
         this.tips = tips;
     }
 
+    //endregion
 
     @Override
     public String toString() {

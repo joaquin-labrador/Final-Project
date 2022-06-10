@@ -1,23 +1,29 @@
 package Restaurant;
 
 import Employee.*;
+import Files.TicketFile;
 
 import java.util.*;
 
 public class Lounge implements LoungueTask {
+    private List<Ticket> ticketList = new ArrayList<>();
     private List<Employee> employees = new ArrayList<>();
     private Map<Integer, Table> tables = new HashMap<>();
     private List<Menu> menu = new ArrayList<>();
     private List<Beverages> beverages = new ArrayList<>();
 
+
+    //region Constructors and Getters and Setters
     public Lounge() {
     }
 
-    public Lounge(List<Employee> employees, Map<Integer, Table> tables, List<Menu> menu, List<Beverages> beverages) {
+    public Lounge(List<Employee> employees, Map<Integer, Table> tables, List<Menu> menu,
+                  List<Beverages> beverages, List<Ticket> tickets) {
         this.employees = employees;
         this.tables = tables;
         this.menu = menu;
         this.beverages = beverages;
+        this.ticketList = tickets;
     }
 
     public List<Employee> getEmployees() {
@@ -40,6 +46,13 @@ public class Lounge implements LoungueTask {
         return menu;
     }
 
+    public List<Ticket> getTicketList() {
+        return ticketList;
+    }
+
+    public void setTicketList(List<Ticket> ticketList) {
+        this.ticketList = ticketList;
+    }
 
     public void setMenu(List<Menu> menu) {
         this.menu = menu;
@@ -53,6 +66,7 @@ public class Lounge implements LoungueTask {
         this.beverages = beverages;
     }
 
+    //endregion
     @Override
     public String toString() {
         return "Lounge{" + "employees=" + employees + ", tables=" + tables + ", menu=" + menu + ", beverages=" + beverages + '}';
@@ -131,7 +145,7 @@ public class Lounge implements LoungueTask {
         int table = 0;
         do {
             try {
-                System.out.println("Ingrese el numero de la mesa a tomar el pedido : ");
+                System.out.println("Seleccione la mesa: ");
                 table = sc.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Error ingresaste un caracter no valido");
@@ -147,6 +161,7 @@ public class Lounge implements LoungueTask {
         int cont = 0;
         List<Integer> numbersOfMenu = new ArrayList<>();
         table = selectNumberTable();
+
         System.out.println(menuTakeOrder().toString());
         do {
             try {
@@ -172,15 +187,16 @@ public class Lounge implements LoungueTask {
         List<Menu> menuAux = new ArrayList<>();
         menuAux = searchMenu(numbersOfMenu);
 
-       //for each hashmap table
-        if(menuAux != null){
+        //for each hashmap table
+        if (menuAux != null) {
             for (Map.Entry<Integer, Table> table : tables.entrySet()) {
                 if (table.getValue().getNumber() == tableNumber) {
                     table.getValue().setFoodOfTable(menuAux);
                     table.getValue().setTotalPrice(menuAux);
+                    table.getValue().setOccupied();
                 }
             }
-        }else{
+        } else {
             System.out.println("No se encontro el menu");
         }
 
@@ -208,7 +224,8 @@ public class Lounge implements LoungueTask {
             System.out.println(menu.toString());
         }
     }
-    private String menuTable(){
+
+    private String menuTable() {
 
         return """
                 Elige una opcion :\s
@@ -219,7 +236,8 @@ public class Lounge implements LoungueTask {
                  """;
 
     }
-    public void tableOperations(){
+
+    public void tableOperations() {
         Scanner sc = new Scanner(System.in);
         int op = 0;
         do {
@@ -245,7 +263,49 @@ public class Lounge implements LoungueTask {
             }
         } while (op != 0);
     }
-    public void showAvailableTables(){
+
+
+
+    public void tableToCollect() {
+        Scanner sc = new Scanner(System.in);
+        showActiveTickets();
+        int n = selectNumberTable();
+        int op = 0;
+        boolean isCollect = false;
+        for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+                if (table.getValue().getNumber() == n) {
+                    System.out.println("Total a pagar : " + table.getValue().getTotalPrice());
+                    System.out.println("Se recibio el pago? (Ingrese 1 para recibir el pago)");
+                    op = sc.nextInt();
+                    if (op == 1) {
+                        System.out.println("Dinero cobrado" + table.getValue().getTotalPrice());
+                        generateTicket(table.getValue(), table.getValue().getTotalPrice());
+                        isCollect = true;
+                        table.getValue().setAvailable();
+                    }
+                    else {
+                        System.out.println("No se recibio el pago");
+                    }
+                }
+        }
+        if (isCollect) {
+            System.out.println("Ticket cobrado");
+
+        } else {
+            System.out.println("No se encontro la mesa");
+        }
+    }
+
+    private void generateTicket(Table table , double totalPrice) {
+        TicketFile ticketFile = new TicketFile();
+        Ticket ticket = new Ticket(totalPrice);
+        table.setAvailable();
+        System.out.println("Ticket generado");
+        ticketFile.saveTicket(ticket);
+
+    }
+
+    public void showAvailableTables() {
         for (Map.Entry<Integer, Table> table : tables.entrySet()) {
             if (table.getValue().isAvailable()) {
                 System.out.println(table.getValue().toString());
@@ -253,18 +313,20 @@ public class Lounge implements LoungueTask {
         }
     }
 
-    public void showAllTables(){
+    public void showAllTables() {
         for (Map.Entry<Integer, Table> table : tables.entrySet()) {
             System.out.println(table.getValue().toString());
         }
     }
 
-    public void showActiveTickets(){
+    public void showActiveTickets() {
         for (Map.Entry<Integer, Table> table : tables.entrySet()) {
             if (table.getValue().getTotalPrice() != 0) {
                 System.out.println(table.getValue().showTicket());
             }
         }
     }
+
+
 }
 

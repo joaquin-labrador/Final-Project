@@ -14,6 +14,8 @@ public class Table {
 
     private List<Menu> foodOfTable = new ArrayList<>();
 
+
+    //region CONSTRUCTORS GETTERS AND SETTERS
     public Table() {
         this.foodOfTable = null;
         this.totalPrice = 0;
@@ -25,6 +27,15 @@ public class Table {
         this.foodOfTable = null;
         this.totalPrice = 0;
     }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(List<Menu> totalPrice) {
+        this.totalPrice = totalPrice.stream().mapToDouble(Menu::getPrice).sum();
+    }
+
 
     public int getNumber() {
         return number;
@@ -66,11 +77,10 @@ public class Table {
         this.foodOfTable = foodOfTable;
     }
 
+    //endregion
     @Override
     public String toString() {
-        return "Table{" + "number=" + number + ", capacity=" + capacity + ", isAvailable=" + isAvailable +
-                (this.foodOfTable != null ? ", foodOfTable=" + foodOfTableToString() : "") +
-                ", totalPrice= " + totalPrice + "\n" + '}';
+        return "Table{" + "number=" + number + ", capacity=" + capacity + ", isAvailable=" + isAvailable +'}';
     }
 
     public String foodOfTableToString() {
@@ -81,17 +91,13 @@ public class Table {
         return sb.toString();
     }
 
-    public void tableOperations(){
-        Scanner sc = new Scanner(System.in);
-        int op = 0;
-
-    }
 
     public String showTicket() {
         return "Mesa: " + this.getNumber() +
                 "\n" +
                 "Tickets: \n" + foodOfTableToString() + "\n Total: " + this.totalPrice;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,13 +105,6 @@ public class Table {
         return getNumber() == table.getNumber();
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(List<Menu> totalPrice) {
-        this.totalPrice = totalPrice.stream().mapToDouble(Menu::getPrice).sum();
-    }
 
     @Override
     public int hashCode() {

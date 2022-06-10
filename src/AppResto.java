@@ -1,13 +1,11 @@
 import Employee.*;
 import Files.EmployeeFile;
 import Files.RestoFiles;
+import Files.TicketFile;
 import Restaurant.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public final class AppResto {
     private String restoName;
@@ -20,13 +18,20 @@ public final class AppResto {
     private final RestoFiles restoFiles = new RestoFiles();
     private Lounge lounge = new Lounge();
 
+    private Kitchen kitchen = new Kitchen();
+
+    private TicketFile ticketFile = new TicketFile();
+
+    private List<Ticket> ticketList = new ArrayList<>();
+
     public AppResto() throws IOException {
         this.restoEmployee = employeeFile.getEmployeeList();
         this.beveragesList = restoFiles.getBeveragesList();
         this.foodList = restoFiles.getFoodList();
         this.menuList = restoFiles.getMenuList();
         this.tableList = restoFiles.getTableList();
-        this.lounge  = new Lounge(restoEmployee, tableList, menuList, beveragesList);
+        this.ticketList = ticketFile.getTicketList();
+        this.lounge  = new Lounge(restoEmployee, tableList, menuList, beveragesList, ticketList);
     }
 
     public AppResto(String restoName) throws IOException {
@@ -36,7 +41,8 @@ public final class AppResto {
         this.foodList = restoFiles.getFoodList();
         this.menuList = restoFiles.getMenuList();
         this.tableList = restoFiles.getTableList();
-        this.lounge  = new Lounge(restoEmployee, tableList, menuList, beveragesList);
+        this.ticketList = ticketFile.getTicketList();
+        this.lounge  = new Lounge(restoEmployee, tableList, menuList, beveragesList, ticketList);
 
 
     }

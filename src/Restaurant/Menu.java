@@ -9,6 +9,7 @@ public class Menu {
 
     private int id;
 
+    //region CONSTRUCTORS GETTERS AND SETTERS
     public Menu() {
 
     }
@@ -41,6 +42,8 @@ public class Menu {
     public void setId(int id) {
         this.id = id;
     }
+
+    //endregion
     @Override
     public String toString() {
         return "Menu{" + "price=" + price + ", name=" + name +  '}';
