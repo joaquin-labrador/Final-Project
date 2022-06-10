@@ -2,7 +2,6 @@ package Restaurant;
 
 import Employee.*;
 
-import java.io.IOException;
 import java.util.*;
 
 public class Lounge implements LoungueTask {
@@ -56,12 +55,7 @@ public class Lounge implements LoungueTask {
 
     @Override
     public String toString() {
-        return "Lounge{" +
-                "employees=" + employees +
-                ", tables=" + tables +
-                ", menu=" + menu +
-                ", beverages=" + beverages +
-                '}';
+        return "Lounge{" + "employees=" + employees + ", tables=" + tables + ", menu=" + menu + ", beverages=" + beverages + '}';
     }
 
     @Override
@@ -114,10 +108,163 @@ public class Lounge implements LoungueTask {
                     }
                 }
             }
-        } else
-            System.out.println("Table not found");
+        } else System.out.println("Table not found");
         return false;
     }
 
+    public String menuTakeOrder() {
+        return """
+                Ingrese el numero de menu que desea tomar :\s
+                1.Tortilla de papa\s
+                2.Bife con pure de papa\s
+                3.Papas fritas\s
+                4.Papas fritas con queso cheddar\s
+                5 Milanesa de Pollo con pure de papa\s
+                6.Costillitas de cerdo a la barbacoa\s
+                """;
 
+
+    }
+
+    private int selectNumberTable() {
+        Scanner sc = new Scanner(System.in);
+        int table = 0;
+        do {
+            try {
+                System.out.println("Ingrese el numero de la mesa a tomar el pedido : ");
+                table = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error ingresaste un caracter no valido");
+            }
+        } while (table <= 0 || table > tables.size() && !this.tables.get(table).isAvailable());
+        return table;
+    }
+
+    public void takeOrder() {
+        Scanner sc = new Scanner(System.in);
+        int op = 0;
+        int table = 0;
+        int cont = 0;
+        List<Integer> numbersOfMenu = new ArrayList<>();
+        table = selectNumberTable();
+        System.out.println(menuTakeOrder().toString());
+        do {
+            try {
+                op = sc.nextInt();
+                if (op > 0 && op <= menu.size()) {
+                    numbersOfMenu.add(op);
+                } else {
+                    System.out.println("Ingrese un numero valido");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error ingresaste un caracter no valido");
+            }
+            System.out.println("Desea tomar otro pedido? (Ingrese 1 para tomar otro pedido)");
+            cont = sc.nextInt();
+        } while (cont == 1);
+        doTakeOrder(table, numbersOfMenu);
+
+
+    }
+
+    @Override
+    public void doTakeOrder(int tableNumber, List<Integer> numbersOfMenu) {
+        List<Menu> menuAux = new ArrayList<>();
+        menuAux = searchMenu(numbersOfMenu);
+
+       //for each hashmap table
+        if(menuAux != null){
+            for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+                if (table.getValue().getNumber() == tableNumber) {
+                    table.getValue().setFoodOfTable(menuAux);
+                    table.getValue().setTotalPrice(menuAux);
+                }
+            }
+        }else{
+            System.out.println("No se encontro el menu");
+        }
+
+    }
+
+
+    private List<Menu> searchMenu(List<Integer> numbersOfMenu) {
+        List<Menu> menuAux = new ArrayList<>();
+        for (Integer ofMenu : numbersOfMenu) {
+            for (Menu menu : menu) {
+                if (menu.getId() == ofMenu) {
+                    menuAux.add(menu);
+                }
+            }
+        }
+        if (menuAux.size() == 0) {
+            System.out.println("No se encontro el menu");
+            return null;
+        }
+        return menuAux;
+    }
+
+    public void showMenu() {
+        for (Menu menu : this.menu) {
+            System.out.println(menu.toString());
+        }
+    }
+    private String menuTable(){
+
+        return """
+                Elige una opcion :\s
+                1. Ver mesas disponibles\s
+                2. Ver todas las mesas\s
+                3. Ver tickets activos\s
+                0. Salir\s
+                 """;
+
+    }
+    public void tableOperations(){
+        Scanner sc = new Scanner(System.in);
+        int op = 0;
+        do {
+            try {
+                System.out.println(menuTable());
+                op = sc.nextInt();
+                switch (op) {
+                    case 1:
+                        showAvailableTables();
+                        break;
+                    case 2:
+                        showAllTables();
+                        break;
+                    case 3:
+                        showActiveTickets();
+                        break;
+                    default:
+                        System.out.println("Ingrese una opcion valida");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error ingresaste un caracter no valido");
+            }
+        } while (op != 0);
+    }
+    public void showAvailableTables(){
+        for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+            if (table.getValue().isAvailable()) {
+                System.out.println(table.getValue().toString());
+            }
+        }
+    }
+
+    public void showAllTables(){
+        for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+            System.out.println(table.getValue().toString());
+        }
+    }
+
+    public void showActiveTickets(){
+        for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+            if (table.getValue().getTotalPrice() != 0) {
+                System.out.println(table.getValue().showTicket());
+            }
+        }
+    }
 }
+

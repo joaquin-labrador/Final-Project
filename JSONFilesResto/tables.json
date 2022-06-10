@@ -1,57 +1,50 @@
 {
-  "32": {
+  "0": {
     "number": 1,
-    "capacity": 5,
-    "isAvailable": true
+    "capacity": 4,
+    "isAvailable": true,
+    "totalPrice": 0.0
+  },
+  "32": {
+    "number": 2,
+    "capacity": 1,
+    "isAvailable": true,
+    "totalPrice": 0.0
   },
   "33": {
-    "number": 2,
-    "capacity": 2,
-    "isAvailable": true
-  },
-  "34": {
     "number": 3,
-    "capacity": 3,
-    "isAvailable": true
-  },
-  "35": {
-    "number": 4,
-    "capacity": 4,
-    "isAvailable": true
+    "capacity": 2,
+    "isAvailable": true,
+    "totalPrice": 0.0
   },
   "36": {
-    "number": 5,
-    "capacity": 1,
-    "isAvailable": true
-  },
-  "37": {
-    "number": 6,
-    "capacity": 2,
-    "isAvailable": true
-  },
-  "38": {
-    "number": 7,
+    "number": 4,
     "capacity": 3,
-    "isAvailable": true
+    "isAvailable": true,
+    "totalPrice": 0.0
   },
-  "39": {
+  "216": {
     "number": 8,
+    "capacity": 3,
+    "isAvailable": true,
+    "totalPrice": 0.0
+  },
+  "89": {
+    "number": 7,
+    "capacity": 8,
+    "isAvailable": true,
+    "totalPrice": 0.0
+  },
+  "58": {
+    "number": 6,
+    "capacity": 6,
+    "isAvailable": true,
+    "totalPrice": 0.0
+  },
+  "43": {
+    "number": 5,
     "capacity": 4,
-    "isAvailable": true
-  },
-  "40": {
-    "number": 9,
-    "capacity": 5,
-    "isAvailable": true
-  },
-  "41": {
-    "number": 10,
-    "capacity": 1,
-    "isAvailable": true
-  },
-  "42": {
-    "number": 11,
-    "capacity": 2,
-    "isAvailable": true
+    "isAvailable": true,
+    "totalPrice": 0.0
   }
 }

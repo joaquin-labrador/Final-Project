@@ -109,12 +109,15 @@ public class Manager extends Employee implements Menus, EmployeeTask {
                     addEmployee();
                     break;
                 }
-                case 5, 6, 7, 8 -> {
+                case 5 -> {
+                    this.lounge.takeOrder();
+                }
+                case 6, 7, 8 -> {
                     System.out.println("En desarrollo");
                     break;
                 }
                 case 9 -> {
-                    System.out.println(lounge.getTables().toString());
+                    lounge.tableOperations();
                     break;
                 }
                 case 10 -> {
@@ -166,8 +169,8 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         System.out.println("2. Fichar salida");
         System.out.println("3. Reservar mesa");
         System.out.println("4. Agregar empleados");
-        System.out.println("5. Editar precios");
-        System.out.println("6. Agregar platos");
+        System.out.println("5. Tomar pedidos");
+        System.out.println("6. Editar precios");
         System.out.println("7. Ver cuanta mesa");
         System.out.println("8. Cancelar reserva");
         System.out.println("9. Ver mesas");
