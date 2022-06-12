@@ -6,6 +6,7 @@ public class Beverages {
     private int stock;
 
     private int id;
+
     //region CONSTRUCTORS GETTERS AND SETTERS
     public Beverages() {
     }
@@ -53,11 +54,11 @@ public class Beverages {
 
     @Override
     public String toString() {
-        return "Beverages{" + "price=" + price + ", name=" + name + ", stock=" + stock + '}';
+        return "Beverages{" + "price=" + price + ", name=" + name + ", stock=" + stock + " id " + this.id + "\n" + '}';
     }
 
-    public String toTicket(){
-        return "Beverages{" + "price=" + price + ", name=" + name + "\n" +'}';
+    public String toTicket() {
+        return "Beverages{" + "price=" + price + ", name=" + name + "\n" + '}';
     }
 
 }

@@ -24,6 +24,7 @@ public class Table {
     //region CONSTRUCTORS GETTERS AND SETTERS
     public Table() {
         this.foodOfTable = null;
+        this.beveragesOfTable = null;
         this.totalPrice = 0;
     }
 
@@ -31,6 +32,7 @@ public class Table {
         this.number = number;
         this.capacity = capacity;
         this.foodOfTable = null;
+        this.beveragesOfTable = null;
         this.totalPrice = 0;
     }
 
@@ -79,7 +81,7 @@ public class Table {
 
     public void setAvailable() {
         this.totalPrice = 0;
-        this.foodOfTable.clear();
+        this.foodOfTable = null;
         isAvailable = true;
     }
 

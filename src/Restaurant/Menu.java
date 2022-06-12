@@ -39,6 +39,7 @@ public class Menu {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -46,6 +47,6 @@ public class Menu {
     //endregion
     @Override
     public String toString() {
-        return "Menu{" + "price=" + price + ", name=" + name +  '}';
+        return "Menu{" + "price=" + price + ", name=" + name + " id " + this.id + "\n" + '}';
     }
 }

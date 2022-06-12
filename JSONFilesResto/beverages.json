@@ -6,7 +6,7 @@
     "id": 1
   },
   {
-    "price": 200.0,
+    "price": 255.0,
     "name": "Sprite",
     "stock": 55,
     "id": 2
@@ -54,7 +54,7 @@
     "id": 9
   },
   {
-    "price": 300.0,
+    "price": 250.0,
     "name": "Agua villavicencio",
     "stock": 250,
     "id": 10

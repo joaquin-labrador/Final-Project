@@ -17,8 +17,7 @@ public class Lounge implements LoungueTask {
     public Lounge() {
     }
 
-    public Lounge(List<Employee> employees, Map<Integer, Table> tables, List<Menu> menu,
-                  List<Beverages> beverages, List<Ticket> tickets) {
+    public Lounge(List<Employee> employees, Map<Integer, Table> tables, List<Menu> menu, List<Beverages> beverages, List<Ticket> tickets) {
         this.employees = employees;
         this.tables = tables;
         this.menu = menu;
@@ -127,7 +126,7 @@ public class Lounge implements LoungueTask {
     }
 
 
-    private int selectNumberTable() {
+    public int selectNumberTable() {
         Scanner sc = new Scanner(System.in);
         int table = 0;
         do {
@@ -198,17 +197,13 @@ public class Lounge implements LoungueTask {
         boolean isTaked = false;
         do {
             try {
-                if(op  != 0)
-                    System.out.println("Ingrese otra bebida. 11- para terminar");
+                if (op != 0) System.out.println("Ingrese otra bebida. 11- para terminar");
                 op = sc.nextInt();
-                if (op > 0 && op <= beverages.size())
-                    numbersOfBeverage.add(op);
-                else if (op == 11){
+                if (op > 0 && op <= beverages.size()) numbersOfBeverage.add(op);
+                else if (op == 11) {
                     System.out.println("");
                     isTaked = true;
-                }
-                else
-                    System.out.println("Numero no validos");
+                } else System.out.println("Numero no validos");
             } catch (InputMismatchException e) {
                 System.out.println("Error ingresaste un caracter no valido");
             }
@@ -287,6 +282,9 @@ public class Lounge implements LoungueTask {
                     case 3:
                         showActiveTickets();
                         break;
+                    case 4:
+                        showBookedTables();
+                        break;
                     default:
                         System.out.println("Ingrese una opcion valida");
                         break;
@@ -327,6 +325,21 @@ public class Lounge implements LoungueTask {
         }
     }
 
+    public void cancelBookedTable() {
+        showBookedTables();
+        int tableNumber = selectNumberTable();
+        for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+            if (table.getValue().getNumber() == tableNumber) {
+                if (table.getValue().getFoodOfTable() == null || table.getValue().getBeveragesOfTable() == null) {
+                    table.getValue().setAvailable();
+                    System.out.println("Reserva cancelada");
+                } else {
+                    System.out.println("Esta mesa tienen comensales, no se puede cancelar");
+                }
+            }
+        }
+    }
+
     private void generateTicket(Table table, double totalPrice) {
         TicketFile ticketFile = new TicketFile();
         Ticket ticket = new Ticket(totalPrice);
@@ -358,6 +371,21 @@ public class Lounge implements LoungueTask {
         }
     }
 
+    public void showBookedTables() {
+        for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+            if (!table.getValue().isAvailable()) {
+                System.out.println(table.getValue().toString());
+            }
+        }
+    }
+
+    public void showAllBeverages() {
+        for (Beverages beverages : beverages) {
+            System.out.println(beverages.toString());
+        }
+    }
+
+
     private String menuTable() {
 
         return """
@@ -365,6 +393,7 @@ public class Lounge implements LoungueTask {
                 1. Ver mesas disponibles\s
                 2. Ver todas las mesas\s
                 3. Ver tickets activos\s
+                4. Ver mesass ocupadas\s
                 0. Salir\s
                  """;
 

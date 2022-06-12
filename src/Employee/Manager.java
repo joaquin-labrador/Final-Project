@@ -1,5 +1,6 @@
 package Employee;
 
+import Files.EditRestoFile;
 import Files.EmployeeFile;
 import Files.RestoFiles;
 import Files.TicketFile;
@@ -120,13 +121,13 @@ public class Manager extends Employee implements Menus, EmployeeTask {
                     this.lounge.tableToCollect();
                     break;
                 }
-                case 7 ->  {
+                case 7 -> {
                     System.out.println("La ganacia total hasta el momento es: " + getTotalProfit());
 
                     break;
                 }
-                        case 8 -> {
-                    System.out.println("En desarrollo");
+                case 8 -> {
+                    lounge.cancelBookedTable();
                     break;
                 }
                 case 9 -> {
@@ -137,10 +138,14 @@ public class Manager extends Employee implements Menus, EmployeeTask {
                     deleteEmployee();
                     break;
                 }
+                case 11 -> {
+                    operationEditPrice();
+                    break;
+                }
 
-                case 11 -> exit(0);
+                case 12 -> exit(0);
             }
-        } while (op > 0 && op < 12);
+        } while (op > 0 && op < 13);
     }
 
     public void deleteEmployee() {
@@ -174,7 +179,8 @@ public class Manager extends Employee implements Menus, EmployeeTask {
             exit(0);
         }
     }
-    private double getTotalProfit(){
+
+    private double getTotalProfit() {
         TicketFile ticketFile = new TicketFile();
         List<Ticket> ticketList = ticketFile.getTicketList();
         double totalProfit = 0;
@@ -196,7 +202,102 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         System.out.println("8. Cancelar reserva");
         System.out.println("9. Ver mesas");
         System.out.println("10. Eliminar empleado");
-        System.out.println("11. Salir");
+        System.out.println("11. Editar precios");
+        System.out.println("12. Salir");
+
+    }
+
+    private void operationEditPrice() throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int op = 0;
+        boolean exit = false;
+        System.out.println(menuEditPrice());
+        do {
+            op = sc.nextInt();
+            try {
+
+                switch (op) {
+                    case 0 -> {
+                        exit = true;
+                        break;
+                    }
+                    case 1 -> {
+                        editMenuPrice();
+                        exit = true;
+                        break;
+                    }
+                    case 2 -> {
+                        editBeveragesPrice();
+                        exit = true;
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("El id ingresado no es valido");
+            }
+
+        } while (!exit);
+    }
+
+    private void editMenuPrice() {
+        int op;
+        Scanner sc = new Scanner(System.in);
+        EditRestoFile editRestoFile = new EditRestoFile();
+        System.out.println("Seleccione un menu a editar el precio");
+        System.out.println(lounge.getMenu().toString());
+        op = sc.nextInt();
+
+        try {
+            if (op > this.lounge.getMenu().size()) {
+                System.out.println("El menu no existe");
+            } else {
+                System.out.println("Ingrese el nuevo precio");
+                double price = sc.nextDouble();
+                editRestoFile.saveNewPriceMenu(op, price);
+                System.out.println("El precio ha sido editado");
+            }
+
+        } catch (Exception e) {
+            System.out.println("El numero ingresado no es valido");
+        }
+
+
+    }
+
+    private void editBeveragesPrice() {
+        EditRestoFile editRestoFile = new EditRestoFile();
+        int op;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Seleccione un bebida a editar el precio");
+        System.out.println(lounge.getBeverages().toString());
+        op = sc.nextInt();
+
+        try {
+
+            if (op > this.lounge.getBeverages().size()) {
+                System.out.println("La bebida no existe");
+            } else {
+                System.out.println("Ingrese el nuevo precio");
+                double price = sc.nextDouble();
+                editRestoFile.saveNewPriceBeverage(op, price);
+                System.out.println("El precio ha sido editado");
+
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("El numero ingresado no es valido");
+        }
+
+    }
+
+    private String menuEditPrice() {
+        return """
+                Elige una opcion:\s
+                1- Editar precio de un menu\s
+                2- Editar precio de una bebida\s
+                0- Volver\s
+                """;
 
     }
 
