@@ -1,5 +1,7 @@
 package Restaurant;
 
+import com.google.gson.internal.bind.util.ISO8601Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +15,10 @@ public class Table {
     private double totalPrice;
 
     private List<Menu> foodOfTable = new ArrayList<>();
+
+    private List<Beverages> beveragesOfTable = new ArrayList<>();
+
+    private double totalPriceBeverages  = 0;
 
 
     //region CONSTRUCTORS GETTERS AND SETTERS
@@ -29,14 +35,24 @@ public class Table {
     }
 
     public double getTotalPrice() {
-        return totalPrice;
+        return totalPrice + totalPriceBeverages;
+    }
+
+    public List<Beverages> getBeveragesOfTable() {
+        return beveragesOfTable;
+    }
+
+    public void setBeveragesOfTable(List<Beverages> beveragesOfTable) {
+        this.beveragesOfTable = beveragesOfTable;
     }
 
     public void setTotalPrice(List<Menu> totalPrice) {
         this.totalPrice = totalPrice.stream().mapToDouble(Menu::getPrice).sum();
     }
 
-
+    public void setTotalPriceBeverages(List<Beverages> totalPriceBeverages) {
+        this.totalPriceBeverages = totalPriceBeverages.stream().mapToDouble(Beverages::getPrice).sum();
+    }
     public int getNumber() {
         return number;
     }
@@ -90,12 +106,21 @@ public class Table {
         }
         return sb.toString();
     }
-
+    public String beveragesOfTableToString() {
+        StringBuilder sb = new StringBuilder();
+        for (Beverages beverages : beveragesOfTable) {
+            sb.append(beverages.toTicket()).append("\n");
+        }
+        return sb.toString();
+    }
 
     public String showTicket() {
         return "Mesa: " + this.getNumber() +
                 "\n" +
-                "Tickets: \n" + foodOfTableToString() + "\n Total: " + this.totalPrice;
+                "Tickets: \n" + foodOfTableToString() +
+                "Bebidas:  \n  " + beveragesOfTableToString() +
+                "\n Total food: " + this.totalPrice + "$" +
+                "\n Total beverages "+ this.totalPriceBeverages + "$" +"\n";
     }
 
     @Override

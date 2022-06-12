@@ -5,14 +5,16 @@ public class Beverages {
     private String name;
     private int stock;
 
+    private int id;
     //region CONSTRUCTORS GETTERS AND SETTERS
     public Beverages() {
     }
 
-    public Beverages(double price, String name, int stock) {
+    public Beverages(double price, String name, int stock, int id) {
         this.price = price;
         this.name = name;
         this.stock = stock;
+        this.id = id;
     }
 
     public double getPrice() {
@@ -25,6 +27,14 @@ public class Beverages {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -46,6 +56,9 @@ public class Beverages {
         return "Beverages{" + "price=" + price + ", name=" + name + ", stock=" + stock + '}';
     }
 
+    public String toTicket(){
+        return "Beverages{" + "price=" + price + ", name=" + name + "\n" +'}';
+    }
 
 }
 

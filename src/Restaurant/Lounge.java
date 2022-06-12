@@ -126,19 +126,6 @@ public class Lounge implements LoungueTask {
         return false;
     }
 
-    public String menuTakeOrder() {
-        return """
-                Ingrese el numero de menu que desea tomar :\s
-                1.Tortilla de papa\s
-                2.Bife con pure de papa\s
-                3.Papas fritas\s
-                4.Papas fritas con queso cheddar\s
-                5 Milanesa de Pollo con pure de papa\s
-                6.Costillitas de cerdo a la barbacoa\s
-                """;
-
-
-    }
 
     private int selectNumberTable() {
         Scanner sc = new Scanner(System.in);
@@ -193,6 +180,7 @@ public class Lounge implements LoungueTask {
                 if (table.getValue().getNumber() == tableNumber) {
                     table.getValue().setFoodOfTable(menuAux);
                     table.getValue().setTotalPrice(menuAux);
+                    takeBeverage(tableNumber);
                     table.getValue().setOccupied();
                 }
             }
@@ -202,6 +190,46 @@ public class Lounge implements LoungueTask {
 
     }
 
+    public void takeBeverage(int tableNumber) {
+        Scanner sc = new Scanner(System.in);
+        int op = 0;
+        System.out.println(menuBaverage().toString());
+        List<Integer> numbersOfBeverage = new ArrayList<>();
+        boolean isTaked = false;
+        do {
+            try {
+                if(op  != 0)
+                    System.out.println("Ingrese otra bebida. 11- para terminar");
+                op = sc.nextInt();
+                if (op > 0 && op <= beverages.size())
+                    numbersOfBeverage.add(op);
+                else if (op == 11){
+                    System.out.println("");
+                    isTaked = true;
+                }
+                else
+                    System.out.println("Numero no validos");
+            } catch (InputMismatchException e) {
+                System.out.println("Error ingresaste un caracter no valido");
+            }
+        } while (!isTaked);
+        doTakeBeverage(tableNumber, numbersOfBeverage);
+
+    }
+
+
+    public void doTakeBeverage(int tableNumber, List<Integer> numbersOfBeverage) {
+        List<Beverages> beveragesAux = new ArrayList<>();
+        beveragesAux = searchBeverages(numbersOfBeverage);
+        if (beveragesAux != null) {
+            for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+                if (table.getValue().getNumber() == tableNumber) {
+                    table.getValue().setBeveragesOfTable(beveragesAux);
+                    table.getValue().setTotalPriceBeverages(beveragesAux);
+                }
+            }
+        }
+    }
 
     private List<Menu> searchMenu(List<Integer> numbersOfMenu) {
         List<Menu> menuAux = new ArrayList<>();
@@ -219,23 +247,28 @@ public class Lounge implements LoungueTask {
         return menuAux;
     }
 
+    private List<Beverages> searchBeverages(List<Integer> numbersOfBeverage) {
+        List<Beverages> beveragesAux = new ArrayList<>();
+        for (Integer ofBeverage : numbersOfBeverage) {
+            for (Beverages beverages : beverages) {
+                if (beverages.getId() == ofBeverage) {
+                    beveragesAux.add(beverages);
+                }
+            }
+        }
+        if (beveragesAux.size() == 0) {
+            System.out.println("No se encontro el bebida");
+            return null;
+        }
+        return beveragesAux;
+    }
+
     public void showMenu() {
         for (Menu menu : this.menu) {
             System.out.println(menu.toString());
         }
     }
 
-    private String menuTable() {
-
-        return """
-                Elige una opcion :\s
-                1. Ver mesas disponibles\s
-                2. Ver todas las mesas\s
-                3. Ver tickets activos\s
-                0. Salir\s
-                 """;
-
-    }
 
     public void tableOperations() {
         Scanner sc = new Scanner(System.in);
@@ -265,7 +298,6 @@ public class Lounge implements LoungueTask {
     }
 
 
-
     public void tableToCollect() {
         Scanner sc = new Scanner(System.in);
         showActiveTickets();
@@ -273,20 +305,19 @@ public class Lounge implements LoungueTask {
         int op = 0;
         boolean isCollect = false;
         for (Map.Entry<Integer, Table> table : tables.entrySet()) {
-                if (table.getValue().getNumber() == n) {
-                    System.out.println("Total a pagar : " + table.getValue().getTotalPrice());
-                    System.out.println("Se recibio el pago? (Ingrese 1 para recibir el pago)");
-                    op = sc.nextInt();
-                    if (op == 1) {
-                        System.out.println("Dinero cobrado" + table.getValue().getTotalPrice());
-                        generateTicket(table.getValue(), table.getValue().getTotalPrice());
-                        isCollect = true;
-                        table.getValue().setAvailable();
-                    }
-                    else {
-                        System.out.println("No se recibio el pago");
-                    }
+            if (table.getValue().getNumber() == n) {
+                System.out.println("Total a pagar : " + table.getValue().getTotalPrice());
+                System.out.println("Se recibio el pago? (Ingrese 1 para recibir el pago)");
+                op = sc.nextInt();
+                if (op == 1) {
+                    System.out.println("Dinero cobrado" + table.getValue().getTotalPrice());
+                    generateTicket(table.getValue(), table.getValue().getTotalPrice());
+                    isCollect = true;
+                    table.getValue().setAvailable();
+                } else {
+                    System.out.println("No se recibio el pago");
                 }
+            }
         }
         if (isCollect) {
             System.out.println("Ticket cobrado");
@@ -296,7 +327,7 @@ public class Lounge implements LoungueTask {
         }
     }
 
-    private void generateTicket(Table table , double totalPrice) {
+    private void generateTicket(Table table, double totalPrice) {
         TicketFile ticketFile = new TicketFile();
         Ticket ticket = new Ticket(totalPrice);
         table.setAvailable();
@@ -327,6 +358,46 @@ public class Lounge implements LoungueTask {
         }
     }
 
+    private String menuTable() {
+
+        return """
+                Elige una opcion :\s
+                1. Ver mesas disponibles\s
+                2. Ver todas las mesas\s
+                3. Ver tickets activos\s
+                0. Salir\s
+                 """;
+
+    }
+
+    public String menuTakeOrder() {
+        return """
+                Ingrese el numero de menu que desea tomar :\s
+                1.Tortilla de papa\s
+                2.Bife con pure de papa\s
+                3.Papas fritas\s
+                4.Papas fritas con queso cheddar\s
+                5 Milanesa de Pollo con pure de papa\s
+                6.Costillitas de cerdo a la barbacoa\s
+                """;
+    }
+
+    public String menuBaverage() {
+        return """
+                Ingrese el numero de bebida que desea tomar :\s
+                1.Coca-cola\s
+                2.Fanta\s
+                3.Sprite\s
+                4.Coca-cola zero\s
+                5.Fanta zero\s
+                6.Sprite zero\s
+                7.Vino tinto\s
+                8.Vino blanco\s
+                9.Cerveza\s
+                10.Agua\s
+                11.Salir\s
+                """;
+    }
 
 }
 

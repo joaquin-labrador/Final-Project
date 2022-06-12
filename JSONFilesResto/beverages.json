@@ -2,46 +2,61 @@
   {
     "price": 200.0,
     "name": "Coca-Cola",
-    "stock": 100
+    "stock": 100,
+    "id": 1
   },
   {
     "price": 200.0,
     "name": "Sprite",
-    "stock": 55
+    "stock": 55,
+    "id": 2
   },
   {
     "price": 200.0,
     "name": "Fanta",
-    "stock": 70
+    "stock": 70,
+    "id": 3
   },
   {
     "price": 250.0,
     "name": "Coca-Cola Zero",
-    "stock": 100
+    "stock": 100,
+    "id": 4
   },
   {
     "price": 250.0,
     "name": "Sprite Zero",
-    "stock": 20
+    "stock": 20,
+    "id": 5
   },
   {
     "price": 250.0,
     "name": "Fanta Zero",
-    "stock": 10
+    "stock": 10,
+    "id": 6
   },
   {
     "price": 500.0,
     "name": "Vino Tinto de la casa",
-    "stock": 200
+    "stock": 200,
+    "id": 7
   },
   {
     "price": 500.0,
     "name": "Vino Blanco de la casa",
-    "stock": 200
+    "stock": 200,
+    "id": 8
   },
   {
     "price": 300.0,
     "name": "Cerveza quilmes",
-    "stock": 250
+    "stock": 250,
+    "id": 9
+  },
+  {
+    "price": 300.0,
+    "name": "Agua villavicencio",
+    "stock": 250,
+    "id": 10
   }
 ]

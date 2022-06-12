@@ -3,5 +3,25 @@
     "idTickets": "d68c7051-3dfd-4ee7-9d4b-2f187754ddda",
     "date": "2022-06-10",
     "price": 600.0
+  },
+  {
+    "idTickets": "5174797c-22fa-43cc-8b8f-8b18c8b11e8c",
+    "date": "2022-06-12",
+    "price": 1350.0
+  },
+  {
+    "idTickets": "8cd96a5a-3099-4068-9355-627c5771dafe",
+    "date": "2022-06-12",
+    "price": 2200.0
+  },
+  {
+    "idTickets": "8bcae147-8008-4ff3-a787-bf9eef5d5d1a",
+    "date": "2022-06-12",
+    "price": 950.0
+  },
+  {
+    "idTickets": "ad7ca9d2-b63c-43c8-bc00-dcf08592ee35",
+    "date": "2022-06-12",
+    "price": 4000.0
   }
 ]
