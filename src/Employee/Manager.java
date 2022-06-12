@@ -2,7 +2,9 @@ package Employee;
 
 import Files.EmployeeFile;
 import Files.RestoFiles;
+import Files.TicketFile;
 import Restaurant.Lounge;
+import Restaurant.Ticket;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -118,7 +120,12 @@ public class Manager extends Employee implements Menus, EmployeeTask {
                     this.lounge.tableToCollect();
                     break;
                 }
-                case 7, 8 -> {
+                case 7 ->  {
+                    System.out.println("La ganacia total hasta el momento es: " + getTotalProfit());
+
+                    break;
+                }
+                        case 8 -> {
                     System.out.println("En desarrollo");
                     break;
                 }
@@ -167,7 +174,15 @@ public class Manager extends Employee implements Menus, EmployeeTask {
             exit(0);
         }
     }
-
+    private double getTotalProfit(){
+        TicketFile ticketFile = new TicketFile();
+        List<Ticket> ticketList = ticketFile.getTicketList();
+        double totalProfit = 0;
+        for (Ticket ticket : ticketList) {
+            totalProfit += ticket.getPrice();
+        }
+        return totalProfit;
+    }
 
     @Override
     public void showMenu() {
@@ -177,7 +192,7 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         System.out.println("4. Agregar empleados");
         System.out.println("5. Tomar pedidos");
         System.out.println("6. Cobrar mesa");
-        System.out.println("7. Editar precios");
+        System.out.println("7. Ganancia total");
         System.out.println("8. Cancelar reserva");
         System.out.println("9. Ver mesas");
         System.out.println("10. Eliminar empleado");
