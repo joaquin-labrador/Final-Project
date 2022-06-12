@@ -10,13 +10,14 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
         AppResto resto = new AppResto("La marquesita");
-        Employee user;
-
-        user = resto.signIn("managerMaximo", "34324esds3");
-        resto.userOptions(user);
-
+        try {
+            Employee user;
+            user = resto.signIn("managerMaximo", "34324esds3");
+            resto.userOptions(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
