@@ -5,7 +5,12 @@ import Files.TicketFile;
 import Restaurant.*;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Map;
+import java.util.HashMap;
+
 
 public final class AppResto {
     private String restoName;

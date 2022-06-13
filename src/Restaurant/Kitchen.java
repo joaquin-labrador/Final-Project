@@ -20,11 +20,16 @@ public class Kitchen {
 
     //region CONSTRUCTORS GETTERS AND SETTERS
     public Kitchen() throws IOException {
+
     }
 
     public Kitchen(List<Food> foodList) throws IOException {
 
-        this.foodList = foodList;
+        try {
+            this.foodList = foodList;
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
 

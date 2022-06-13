@@ -1,24 +1,29 @@
 import Employee.*;
-import Restaurant.Table;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         AppResto resto = new AppResto("La marquesita");
-        try {
-            Employee user;
-            user = resto.signIn("chefJoaquin", "123gf45");
-            resto.userOptions(user);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+       // System.out.println(resto.getRestoEmployee());
+       // System.out.println(resto.getBeveragesList());
+
+        Employee user;
+
+        user = resto.signIn("kitchenerMatias", "67sdafdf@-3");
+
+        resto.userOptions(user);
+
+
+
+
+
 
     }
 }
+
+/*
+ *Escribir archvos por seperado y despues añadirlos al arrayList
+ *  */
 
