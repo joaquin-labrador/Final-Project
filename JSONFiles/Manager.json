@@ -2,6 +2,7 @@
   {
     "hourSalary": 25.0,
     "inEmergency": false,
+    "myProfit": 300.0,
     "name": "Maximo",
     "lastName": "Torterolo",
     "dateOfBrith": "2002-06-23",

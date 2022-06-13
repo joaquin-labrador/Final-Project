@@ -1,18 +1,23 @@
 package Employee;
 
-import Employee.Employee;
+import Files.EmployeeFile;
+import Restaurant.Lounge;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
 
 public class Server extends Employee
-        implements Menus, EmployeeTask {
+        implements EmployeeInterface {
 
     private double hourSalary;
 
     private double tips;
+
+    private double myProfit;
+
+    private Lounge lounge;
 
     //region CONSTRUCTORS GETTERS AND SETTERS
     public Server() {
@@ -25,6 +30,17 @@ public class Server extends Employee
 
     }
 
+    public double getMyProfit() {
+        return myProfit;
+    }
+
+    public Lounge getLounge() {
+        return lounge;
+    }
+
+    public void setLounge(Lounge lounge) {
+        this.lounge = lounge;
+    }
 
     public double getHourSalary() {
         return hourSalary;
@@ -39,7 +55,7 @@ public class Server extends Employee
     }
 
     public void setTips(double tips) {
-        this.tips = tips;
+        this.tips += tips;
     }
 //endregion
 
@@ -51,45 +67,69 @@ public class Server extends Employee
                 '}';
     }
 
+    @Override
+    public void calculateProfit(double hours) {
+        this.myProfit += ((this.hourSalary * hours) + this.tips);
+    }
 
     @Override
     public void showMenu() {
         System.out.println("Selecciona una opcion: ");
         System.out.println("1. Fichar entrada");
         System.out.println("2. Fichar salida");
-        System.out.println("3. Agregar pedidos ");
-        System.out.println("4. Ver cuenta");
-        System.out.println("5. Salir");
+        System.out.println("3. Tomar pedidos ");
+        System.out.println("4. Ver Mesas");
+        System.out.println("5. Combrar una mesa");
+        System.out.println("6. Sumar mi propina");
+        System.out.println("7. Salir");
     }
 
     @Override
-    public void employeeOperations() {
-        int op;
-        Scanner sc = new Scanner(System.in);
-        do {
-            showMenu();
-            op = sc.nextInt();
-            switch (op) {
-                case 1:
-                    super.clockIn();
-                    System.out.println(toString());
-                    break;
-                case 2:
-                    super.clockOut();
-                    System.out.println(toString());
-                    break;
-                case 3:
-                    System.out.println("En desarrollo");
-                    break;
-                case 4:
-                    System.out.println("En desarrollo");
-                    break;
-                case 5:
-                    exit(0);
-                    break;
+    public void employeeOperations() throws IOException {
+        try {
+            int op;
+            Scanner sc = new Scanner(System.in);
+            int tips = 0;
+            double hoursWork = 0;
+            do {
+                showMenu();
+                op = sc.nextInt();
+                switch (op) {
+                    case 1:
+                        super.clockIn();
+                        break;
+                    case 2:
+                    case 7:
+                        hoursWork = super.clockOut();
+                        calculateProfit(hoursWork);
+                        EmployeeFile file = new EmployeeFile();
+                        file.saveMeServer(this, hoursWork);
+                        exit(0);
+                        break;
+                    case 3:
+                        this.lounge.takeOrder();
+                        break;
+                    case 4:
+                        this.lounge.tableOperations();
+                        break;
+                    case 5:
+                        this.lounge.tableToCollect();
+                        break;
+                    case 6:
+                        System.out.println("Ingrese la cantidad de propina: ");
+                        tips = sc.nextInt();
+                        this.setTips(tips);
+                        break;
 
 
-            }
-        } while (op > 0 && op < 5);
+                }
+            } while (op > 0 && op < 5);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("Gracias por su visita");
+            exit(0);
+        }
     }
+
 }

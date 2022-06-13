@@ -1,13 +1,16 @@
 package Employee;
 
-import java.time.LocalDate;
+import Files.EmployeeFile;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 import static java.lang.System.exit;
 
-public class Chef extends Employee implements Menus, EmployeeTask {
+public class Chef extends Employee implements EmployeeInterface {
     private double hourSalary;
     private boolean inEmergency = false;
+    private double myProfit;
 
 
     //region CONSTRUCTORS GETTERS AND SETTERS
@@ -35,6 +38,9 @@ public class Chef extends Employee implements Menus, EmployeeTask {
     public void setInEmergency() {
         this.inEmergency = true;
     }
+    public double getMyProfit(){
+          return this.myProfit;
+    }
 
 
     //endregion
@@ -49,6 +55,11 @@ public class Chef extends Employee implements Menus, EmployeeTask {
     }
 
     @Override
+    public void calculateProfit(double hours) {
+      this.myProfit += (hours * this.hourSalary);
+    }
+
+    @Override
     public void showMenu() {
         System.out.println("Selecciona una opcion: ");
         System.out.println("1. Fichar entrada");
@@ -58,30 +69,34 @@ public class Chef extends Employee implements Menus, EmployeeTask {
     }
 
     @Override
-    public void employeeOperations() {
-        int op;
-        Scanner sc = new Scanner(System.in);
-        do {
-            showMenu();
-            op = sc.nextInt();
-            switch (op) {
-                case 1:
-                    super.clockIn();
-                    System.out.println(toString());
-                    break;
-                case 2:
-                    super.clockOut();
-                    System.out.println(toString());
-                    break;
-                case 3:
-                    System.out.println("En desarrollo");
-                case 4:
-                    exit(0);
-                    break;
-
-
-            }
-        } while (op > 0 && op < 4);
+    public void employeeOperations() throws IOException {
+        try {
+            int op;
+            Scanner sc = new Scanner(System.in);
+            do {
+                showMenu();
+                op = sc.nextInt();
+                switch (op) {
+                    case 1:
+                        super.clockIn();
+                        System.out.println(toString());
+                        break;
+                    case 2 , 4:
+                        double salaryDay = super.clockOut();
+                        EmployeeFile employeeFile = new EmployeeFile();
+                        employeeFile.saveMeChef(this, salaryDay);
+                        exit(0);
+                        break;
+                    case 3:
+                        System.out.println("En desarrollo");
+                        break;
+                }
+            } while (op > 0 && op < 4);
+        }catch (IOException e){
+            System.out.println("Error al guardar");
+        }finally {
+            System.out.println("Gracias por usar nuestro sistema");
+        }
 
     }
 }

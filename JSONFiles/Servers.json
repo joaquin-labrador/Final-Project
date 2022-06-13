@@ -8,7 +8,8 @@
     "id": 41234234,
     "isWorking": false,
     "password": "@dfd678",
-    "userName": "serverAgustin"
+    "userName": "serverAgustin",
+    "myProfit" : 0.0
   },
   {
     "hourSalary": 17.0,
@@ -19,6 +20,7 @@
     "id": 39455959,
     "isWorking": false,
     "password": "ebfe@45",
-    "userName": "serverMatias"
+    "userName": "serverMatias",
+    "myProfit" : 0.0
   }
 ]

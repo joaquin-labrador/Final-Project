@@ -1,11 +1,9 @@
 package Employee;
 
-import Restaurant.*;
-
 import java.io.IOException;
-import java.util.List;
 
-public interface EmployeeTask {
-
+public interface EmployeeInterface {
+    void calculateProfit(double hours);
+    void showMenu();
     void employeeOperations() throws IOException;
 }

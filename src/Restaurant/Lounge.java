@@ -70,7 +70,37 @@ public class Lounge implements LoungueTask {
     public String toString() {
         return "Lounge{" + "employees=" + employees + ", tables=" + tables + ", menu=" + menu + ", beverages=" + beverages + '}';
     }
+    public void tableOperations() {
+        Scanner sc = new Scanner(System.in);
+        int op = 0;
+        do {
+            try {
+                System.out.println(menuTable());
+                op = sc.nextInt();
+                switch (op) {
+                    case 1:
+                        showAvailableTables();
+                        break;
+                    case 2:
+                        showAllTables();
+                        break;
+                    case 3:
+                        showActiveTickets();
+                        break;
+                    case 4:
+                        showBookedTables();
+                        break;
+                    default:
+                        System.out.println("Ingrese una opcion valida");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error ingresaste un caracter no valido");
+            }
+        } while (op != 0);
+    }
 
+    //region Methods book table and cancel table
     @Override
     public void reserveTable() {
         boolean isBooking = false;
@@ -126,6 +156,23 @@ public class Lounge implements LoungueTask {
     }
 
 
+    public void cancelBookedTable() {
+        showBookedTables();
+        int tableNumber = selectNumberTable();
+        for (Map.Entry<Integer, Table> table : tables.entrySet()) {
+            if (table.getValue().getNumber() == tableNumber) {
+                if (table.getValue().getFoodOfTable() == null || table.getValue().getBeveragesOfTable() == null) {
+                    table.getValue().setAvailable();
+                    System.out.println("Reserva cancelada");
+                } else {
+                    System.out.println("Esta mesa tienen comensales, no se puede cancelar");
+                }
+            }
+        }
+    }
+    //endregion
+
+    //region Methods doTakeOrder Menu and beverages
     public int selectNumberTable() {
         Scanner sc = new Scanner(System.in);
         int table = 0;
@@ -225,7 +272,9 @@ public class Lounge implements LoungueTask {
             }
         }
     }
+    //  endregion
 
+    //region Methods searchMenu and searchBeverages
     private List<Menu> searchMenu(List<Integer> numbersOfMenu) {
         List<Menu> menuAux = new ArrayList<>();
         for (Integer ofMenu : numbersOfMenu) {
@@ -258,44 +307,9 @@ public class Lounge implements LoungueTask {
         return beveragesAux;
     }
 
-    public void showMenu() {
-        for (Menu menu : this.menu) {
-            System.out.println(menu.toString());
-        }
-    }
+    //endregion
 
-
-    public void tableOperations() {
-        Scanner sc = new Scanner(System.in);
-        int op = 0;
-        do {
-            try {
-                System.out.println(menuTable());
-                op = sc.nextInt();
-                switch (op) {
-                    case 1:
-                        showAvailableTables();
-                        break;
-                    case 2:
-                        showAllTables();
-                        break;
-                    case 3:
-                        showActiveTickets();
-                        break;
-                    case 4:
-                        showBookedTables();
-                        break;
-                    default:
-                        System.out.println("Ingrese una opcion valida");
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Error ingresaste un caracter no valido");
-            }
-        } while (op != 0);
-    }
-
-
+    //region Methods saveTickets and collectTickets
     public void tableToCollect() {
         Scanner sc = new Scanner(System.in);
         showActiveTickets();
@@ -325,21 +339,6 @@ public class Lounge implements LoungueTask {
         }
     }
 
-    public void cancelBookedTable() {
-        showBookedTables();
-        int tableNumber = selectNumberTable();
-        for (Map.Entry<Integer, Table> table : tables.entrySet()) {
-            if (table.getValue().getNumber() == tableNumber) {
-                if (table.getValue().getFoodOfTable() == null || table.getValue().getBeveragesOfTable() == null) {
-                    table.getValue().setAvailable();
-                    System.out.println("Reserva cancelada");
-                } else {
-                    System.out.println("Esta mesa tienen comensales, no se puede cancelar");
-                }
-            }
-        }
-    }
-
     private void generateTicket(Table table, double totalPrice) {
         TicketFile ticketFile = new TicketFile();
         Ticket ticket = new Ticket(totalPrice);
@@ -348,6 +347,10 @@ public class Lounge implements LoungueTask {
         ticketFile.saveTicket(ticket);
 
     }
+
+    //endregion
+
+    //region Methods Shows Information and Menus
 
     public void showAvailableTables() {
         for (Map.Entry<Integer, Table> table : tables.entrySet()) {
@@ -385,6 +388,11 @@ public class Lounge implements LoungueTask {
         }
     }
 
+    public void showMenu() {
+        for (Menu menu : this.menu) {
+            System.out.println(menu.toString());
+        }
+    }
 
     private String menuTable() {
 
@@ -427,6 +435,6 @@ public class Lounge implements LoungueTask {
                 11.Salir\s
                 """;
     }
-
+    //endregion
 }
 

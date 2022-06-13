@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 import static java.lang.System.exit;
 
-public class Manager extends Employee implements Menus, EmployeeTask {
+public class Manager extends Employee implements EmployeeInterface {
     private Double hourSalary;
     private Boolean inEmergency = false;
 
@@ -23,17 +23,21 @@ public class Manager extends Employee implements Menus, EmployeeTask {
 
     RestoFiles restoFiles;
 
-    Employee employeeFile;
+    EmployeeFile employeeFile;
 
     List<Employee> myEmployeeList;
 
+    private double myProfit;
+
     //region CONSTRUCTORS GETTERS AND SETTERS
     public Manager() {
+        this.myProfit = 0;
     }
 
     public Manager(String name, String lastName, String dateOfBrith, Integer id, String userName, String password, Double hourSalary) {
         super(name, lastName, dateOfBrith, id, userName, password);
         this.hourSalary = hourSalary;
+        this.myProfit = 0;
 
     }
 
@@ -65,11 +69,10 @@ public class Manager extends Employee implements Menus, EmployeeTask {
         this.myEmployeeList = myEmployeeList;
     }
 
-    public Employee getEmployeeFile() {
-        return employeeFile;
-    }
 
     //endregion
+
+
     public Employee searchEmployee(Integer id) {
         for (Employee employee : myEmployeeList) {
             if (employee.getId().equals(id)) {
@@ -89,63 +92,71 @@ public class Manager extends Employee implements Menus, EmployeeTask {
 
     @Override
     public void employeeOperations() throws IOException {
-        int op;
-        Scanner sc = new Scanner(System.in);
-        do {
+        try {
+            int op;
+            Scanner sc = new Scanner(System.in);
             showMenu();
-            op = sc.nextInt();
-            switch (op) {
-                case 1 -> {
-                    super.clockIn();
-                    System.out.println(toString());
-                    break;
-                }
-                case 2 -> {
-                    super.clockOut();
-                    System.out.println(toString());
-                    break;
-                }
-                case 3 -> {
-                    lounge.reserveTable();
-                    break;
-                }
-                case 4 -> {
-                    addEmployee();
-                    break;
-                }
-                case 5 -> {
-                    this.lounge.takeOrder();
-                    break;
-                }
-                case 6 -> {
-                    this.lounge.tableToCollect();
-                    break;
-                }
-                case 7 -> {
-                    System.out.println("La ganacia total hasta el momento es: " + getTotalProfit());
+            do {
+                op = sc.nextInt();
+                switch (op) {
+                    case 1 -> {
+                        super.clockIn();
+                        System.out.println(toString());
+                        break;
+                    }
+                    case 2, 12 -> {
+                        double hoursWorked = super.clockOut();
+                        this.employeeFile = new EmployeeFile();
+                        this.employeeFile.saveMeManager(this, hoursWorked);
+                        exit(0);
+                        break;
+                    }
+                    case 3 -> {
+                        lounge.reserveTable();
+                        break;
+                    }
+                    case 4 -> {
+                        addEmployee();
+                        break;
+                    }
+                    case 5 -> {
+                        this.lounge.takeOrder();
+                        break;
+                    }
+                    case 6 -> {
+                        this.lounge.tableToCollect();
+                        break;
+                    }
+                    case 7 -> {
+                        System.out.println("La ganacia total hasta el momento es: " + getTotalProfit());
 
-                    break;
-                }
-                case 8 -> {
-                    lounge.cancelBookedTable();
-                    break;
-                }
-                case 9 -> {
-                    lounge.tableOperations();
-                    break;
-                }
-                case 10 -> {
-                    deleteEmployee();
-                    break;
-                }
-                case 11 -> {
-                    operationEditPrice();
-                    break;
-                }
+                        break;
+                    }
+                    case 8 -> {
+                        lounge.cancelBookedTable();
+                        break;
+                    }
+                    case 9 -> {
+                        lounge.tableOperations();
+                        break;
+                    }
+                    case 10 -> {
+                        deleteEmployee();
+                        break;
+                    }
+                    case 11 -> {
+                        operationEditPrice();
+                        break;
+                    }
 
-                case 12 -> exit(0);
-            }
-        } while (op > 0 && op < 13);
+
+                }
+            } while (op > 0 && op < 13);
+        } catch (IOException e) {
+            System.out.println("Error al guardar el empleado");
+        } finally {
+            System.out.println("Gracias por usar el sistema");
+        }
     }
 
     public void deleteEmployee() {
@@ -191,6 +202,11 @@ public class Manager extends Employee implements Menus, EmployeeTask {
     }
 
     @Override
+    public void calculateProfit(double hours) {
+        this.myProfit += (hours * hourSalary);
+    }
+
+    @Override
     public void showMenu() {
         System.out.println("1. Fichar entrada");
         System.out.println("2. Fichar salida");
@@ -207,7 +223,7 @@ public class Manager extends Employee implements Menus, EmployeeTask {
 
     }
 
-    private void operationEditPrice() throws IOException {
+    private void operationEditPrice() {
         Scanner sc = new Scanner(System.in);
         int op = 0;
         boolean exit = false;

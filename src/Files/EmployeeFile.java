@@ -57,19 +57,19 @@ public class EmployeeFile implements FilesOperations {
             hostListAux = gson.fromJson(readerHost,
                     (new TypeToken<List<Host>>() {
                     }.getType()));
-            if(managerListAux != null) {
+            if (managerListAux != null) {
                 employeeList.addAll(managerListAux);
             }
-            if(chefListAux != null) {
+            if (chefListAux != null) {
                 employeeList.addAll(chefListAux);
             }
-            if(kitchenerListAux != null) {
+            if (kitchenerListAux != null) {
                 employeeList.addAll(kitchenerListAux);
             }
-            if(serverListAux != null) {
+            if (serverListAux != null) {
                 employeeList.addAll(serverListAux);
             }
-            if(hostListAux != null) {
+            if (hostListAux != null) {
                 employeeList.addAll(hostListAux);
             }
 
@@ -142,17 +142,13 @@ public class EmployeeFile implements FilesOperations {
         List<Host> hostListAux = new ArrayList<>();
         if (employeeToDelete instanceof Manager manager) {
             deleteEmployee.deleteManager(reader, exit, gson, manager, managerListAux);
-        }
-        else if (employeeToDelete instanceof Chef chef) {
+        } else if (employeeToDelete instanceof Chef chef) {
             deleteEmployee.deleteChef(reader, exit, gson, chef, chefListAux);
-        }
-        else if (employeeToDelete instanceof Kitchener Kitchener) {
+        } else if (employeeToDelete instanceof Kitchener Kitchener) {
             deleteEmployee.deleteKitchener(reader, exit, gson, Kitchener, kitchenerListAux);
-        }
-        else if (employeeToDelete instanceof Server server) {
+        } else if (employeeToDelete instanceof Server server) {
             deleteEmployee.deleteServer(reader, exit, gson, server, serverListAux);
-        }
-        else if (employeeToDelete instanceof Host host) {
+        } else if (employeeToDelete instanceof Host host) {
             deleteEmployee.deleteHost(reader, exit, gson, host, hostListAux);
         }
 
@@ -175,4 +171,187 @@ public class EmployeeFile implements FilesOperations {
     public List<Employee> getEmployeeList() {
         return employeeList;
     }
+
+
+    public void saveMeManager(Manager manager, double salary) {
+        BufferedReader reader = null;
+        BufferedWriter exit = null;
+        int id = manager.getId();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Manager> managerListAux = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader("JSONFiles\\Manager.json"));
+            managerListAux = gson.fromJson(reader, (new TypeToken<List<Manager>>() {
+            }.getType()));
+            if (managerListAux == null) {
+                managerListAux = new ArrayList<>();
+            }
+            for (Manager managerAux : managerListAux) {
+                if (managerAux.equals(manager)) {
+                    managerAux.calculateProfit(salary);
+                }
+                exit = new BufferedWriter(new FileWriter("JSONFiles\\Manager.json"));
+                String json = gson.toJson(managerListAux, managerListAux.getClass());
+                exit.write(json);
+                System.out.println("Manager saved");
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+            assert exit != null;
+            try {
+                exit.close();
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveMeChef(Chef chef, double salary) {
+        BufferedReader reader = null;
+        BufferedWriter exit = null;
+        int id = chef.getId();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Chef> chefListAux = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader("JSONFiles\\Chef.json"));
+            chefListAux = gson.fromJson(reader, (new TypeToken<List<Chef>>() {
+            }.getType()));
+            if (chefListAux == null) {
+                chefListAux = new ArrayList<>();
+            }
+            for (Chef chefAux : chefListAux) {
+                if (chefAux.equals(chef)) {
+                    chefAux.calculateProfit(salary);
+                }
+                exit = new BufferedWriter(new FileWriter("JSONFiles\\Chef.json"));
+                String json = gson.toJson(chefListAux, chefListAux.getClass());
+                exit.write(json);
+                System.out.println("Chef saved");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+            assert exit != null;
+            try {
+                exit.close();
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveMeKitchener(Kitchener kitchener, double salary) {
+        BufferedReader reader = null;
+        BufferedWriter exit = null;
+        int id = kitchener.getId();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Kitchener> kitchenerListAux = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader("JSONFiles\\Kitchener.json"));
+            kitchenerListAux = gson.fromJson(reader, (new TypeToken<List<Kitchener>>() {
+            }.getType()));
+            if (kitchenerListAux == null) {
+                kitchenerListAux = new ArrayList<>();
+            }
+            for (Kitchener kitchenerAux : kitchenerListAux) {
+                if (kitchenerAux.equals(kitchener)) {
+                    kitchenerAux.calculateProfit(salary);
+                }
+                exit = new BufferedWriter(new FileWriter("JSONFiles\\Kitchener.json"));
+                String json = gson.toJson(kitchenerListAux, kitchenerListAux.getClass());
+                exit.write(json);
+                System.out.println("Kitchener saved");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+            assert exit != null;
+            try {
+                exit.close();
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveMeServer(Server server, double salary) {
+        BufferedReader reader = null;
+        BufferedWriter exit = null;
+        int id = server.getId();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Server> serverListAux = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader("JSONFiles\\Server.json"));
+            serverListAux = gson.fromJson(reader, (new TypeToken<List<Server>>() {
+            }.getType()));
+            if (serverListAux == null) {
+                serverListAux = new ArrayList<>();
+            }
+            for (Server serverAux : serverListAux) {
+                if (serverAux.equals(server)) {
+                    serverAux.calculateProfit(salary);
+                }
+                exit = new BufferedWriter(new FileWriter("JSONFiles\\Server.json"));
+                String json = gson.toJson(serverListAux, serverListAux.getClass());
+                exit.write(json);
+                System.out.println("Server saved");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+            assert exit != null;
+            try {
+                exit.close();
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void saveMeHost(Host host, double salary) {
+        BufferedReader reader = null;
+        BufferedWriter exit = null;
+        int id = host.getId();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Host> hostListAux = new ArrayList<>();
+        try {
+            reader = new BufferedReader(new FileReader("JSONFiles\\Host.json"));
+            hostListAux = gson.fromJson(reader, (new TypeToken<List<Host>>() {
+            }.getType()));
+            if (hostListAux == null) {
+                hostListAux = new ArrayList<>();
+            }
+            for (Host hostAux : hostListAux) {
+                if (hostAux.equals(host)) {
+                    hostAux.calculateProfit(salary);
+                }
+                exit = new BufferedWriter(new FileWriter("JSONFiles\\Host.json"));
+                String json = gson.toJson(hostListAux, hostListAux.getClass());
+                exit.write(json);
+                System.out.println("Host saved");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        } finally {
+            assert exit != null;
+            try {
+                exit.close();
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
+

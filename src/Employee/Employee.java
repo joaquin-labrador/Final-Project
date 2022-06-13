@@ -3,6 +3,7 @@ package Employee;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
+import java.util.Scanner;
 
 
 public abstract class Employee                                                      {
@@ -100,8 +101,11 @@ public abstract class Employee                                                  
     public void clockIn() {
         this.isWorking = true;
     }
-    public void clockOut() {
+    public double clockOut() {
         this.isWorking = false;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Cuantas horas trabajaste?");
+        return sc.nextDouble();
     }
 
     @Override
