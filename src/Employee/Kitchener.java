@@ -63,24 +63,25 @@ public class Kitchener extends Employee
         try {
             int op;
             Scanner sc = new Scanner(System.in);
+            boolean exit = false;
             do {
                 showMenu();
                 op = sc.nextInt();
                 switch (op) {
                     case 1:
                         super.clockIn();
-                        System.out.println(toString());
                         break;
                     case 2, 3:
                         double salaryDay = super.clockOut();
                         EmployeeFile employeeFile = new EmployeeFile();
                         employeeFile.saveMeKitchener(this, salaryDay);
+                        exit = true;
                         exit(0);
                         break;
 
 
                 }
-            } while (op == 1 || op == 2); //While para que el usuario seleccione una opcion valida
+            } while (!exit); //While para que el usuario seleccione una opcion valida
         } catch (IOException e) {
             System.out.println("Error al guardar el empleado");
         } finally {

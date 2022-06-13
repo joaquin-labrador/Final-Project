@@ -18,7 +18,7 @@ public final class AppResto {
     private final RestoFiles restoFiles = new RestoFiles();
     private Lounge lounge = new Lounge();
 
-    private Kitchen kitchen = new Kitchen();
+    private Kitchen kitchen;
 
     private TicketFile ticketFile = new TicketFile();
 
@@ -31,7 +31,10 @@ public final class AppResto {
         this.menuList = restoFiles.getMenuList();
         this.tableList = restoFiles.getTableList();
         this.ticketList = ticketFile.getTicketList();
-        this.lounge  = new Lounge(restoEmployee, tableList, menuList, beveragesList, ticketList);
+        this.lounge = new Lounge( tableList, menuList, beveragesList, ticketList);
+        this.lounge.setRestoEmployee(restoEmployee);
+        this.kitchen = new Kitchen(foodList);
+        this.kitchen.setKitchenEmployeeRead(restoEmployee);
     }
 
     public AppResto(String restoName) throws IOException {
@@ -42,7 +45,10 @@ public final class AppResto {
         this.menuList = restoFiles.getMenuList();
         this.tableList = restoFiles.getTableList();
         this.ticketList = ticketFile.getTicketList();
-        this.lounge  = new Lounge(restoEmployee, tableList, menuList, beveragesList, ticketList);
+        this.lounge = new Lounge(tableList, menuList, beveragesList, ticketList);
+        this.lounge.setRestoEmployee(restoEmployee);
+        this.kitchen = new Kitchen(foodList);
+        this.kitchen.setKitchenEmployeeRead(restoEmployee);
 
 
     }
@@ -80,11 +86,11 @@ public final class AppResto {
         return restoName;
     }
 
-    public void showFile(){
+    public void showFile() {
         employeeFile.showFile();
     }
 
-    public void showAvailableTables(){
+    public void showAvailableTables() {
 
     }
 
@@ -100,25 +106,31 @@ public final class AppResto {
     }
 
     public void userOptions(Employee user) throws IOException {
-        if(user instanceof Kitchener userKitchener){
-            userKitchener.employeeOperations();
-        }
-        else if(user instanceof Host userHost){
-            userHost.employeeOperations();
-        }
-        else if(user instanceof Server userServer){
-            userServer.employeeOperations();
-        }
-        if(user instanceof Manager userManager){
-            userManager.setLounge(lounge);
-            userManager.setMyEmployeeList(restoEmployee);
-            userManager.employeeOperations();
-        }
-        if(user instanceof Chef userChef){
-            userChef.employeeOperations();
+        try {
+
+            if (user instanceof Kitchener userKitchener) {
+                userKitchener.employeeOperations();
+            } else if (user instanceof Host userHost) {
+                userHost.setLounge(lounge);
+                userHost.employeeOperations();
+            } else if (user instanceof Server userServer) {
+                userServer.setLounge(lounge);
+                userServer.employeeOperations();
+            }
+            if (user instanceof Manager userManager) {
+                userManager.setLounge(lounge);
+                userManager.setMyEmployeeList(restoEmployee);
+                userManager.setKitchen(kitchen);
+                userManager.employeeOperations();
+            }
+            if (user instanceof Chef userChef) {
+                userChef.setKitchen(kitchen);
+                userChef.employeeOperations();
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo");
         }
     }
-
 
 
 }

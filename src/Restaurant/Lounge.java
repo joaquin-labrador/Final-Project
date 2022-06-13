@@ -17,8 +17,7 @@ public class Lounge implements LoungueTask {
     public Lounge() {
     }
 
-    public Lounge(List<Employee> employees, Map<Integer, Table> tables, List<Menu> menu, List<Beverages> beverages, List<Ticket> tickets) {
-        this.employees = employees;
+    public Lounge(Map<Integer, Table> tables, List<Menu> menu, List<Beverages> beverages, List<Ticket> tickets) {
         this.tables = tables;
         this.menu = menu;
         this.beverages = beverages;
@@ -29,8 +28,16 @@ public class Lounge implements LoungueTask {
         return employees;
     }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    public void setRestoEmployee(List<Employee> employees) {
+        for (Employee employee : employees) {
+            if (employee instanceof Host || employee instanceof Server) {
+                {
+                    this.employees.add(employee);
+                }
+            }
+
+
+        }
     }
 
     public Map<Integer, Table> getTables() {

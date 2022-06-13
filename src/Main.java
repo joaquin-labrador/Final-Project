@@ -13,7 +13,7 @@ public class Main {
         AppResto resto = new AppResto("La marquesita");
         try {
             Employee user;
-            user = resto.signIn("managerMaximo", "34324esds3");
+            user = resto.signIn("chefJoaquin", "123gf45");
             resto.userOptions(user);
         } catch (IOException e) {
             e.printStackTrace();

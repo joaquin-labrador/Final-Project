@@ -4,6 +4,7 @@ import Files.EditRestoFile;
 import Files.EmployeeFile;
 import Files.RestoFiles;
 import Files.TicketFile;
+import Restaurant.Kitchen;
 import Restaurant.Lounge;
 import Restaurant.Ticket;
 
@@ -16,7 +17,6 @@ import static java.lang.System.exit;
 
 public class Manager extends Employee implements EmployeeInterface {
     private Double hourSalary;
-    private Boolean inEmergency = false;
 
     private Lounge lounge;
 
@@ -25,11 +25,15 @@ public class Manager extends Employee implements EmployeeInterface {
 
     EmployeeFile employeeFile;
 
-    List<Employee> myEmployeeList;
+    List<Employee> myEmployeeList = null;
+
+    Kitchen kitchen;
 
     private double myProfit;
 
     //region CONSTRUCTORS GETTERS AND SETTERS
+
+
     public Manager() {
         this.myProfit = 0;
     }
@@ -41,21 +45,25 @@ public class Manager extends Employee implements EmployeeInterface {
 
     }
 
+    public void setMyEmployeeList(List<Employee> myEmployeeList) {
+        this.myEmployeeList = myEmployeeList;
+    }
     public Double getHourSalary() {
         return hourSalary;
+    }
+
+    public Kitchen getKitchen() {
+        return kitchen;
+    }
+
+    public void setKitchen(Kitchen kitchen) {
+        this.kitchen = kitchen;
     }
 
     public void setHourSalary(Double hourSalary) {
         this.hourSalary = hourSalary;
     }
 
-    public Boolean getInEmergency() {
-        return inEmergency;
-    }
-
-    public void setInEmergency() {
-        this.inEmergency = true;
-    }
 
     public void setLounge(Lounge lounge) {
         this.lounge = lounge;
@@ -65,9 +73,7 @@ public class Manager extends Employee implements EmployeeInterface {
         return lounge;
     }
 
-    public void setMyEmployeeList(List<Employee> myEmployeeList) {
-        this.myEmployeeList = myEmployeeList;
-    }
+
 
 
     //endregion
@@ -85,8 +91,7 @@ public class Manager extends Employee implements EmployeeInterface {
     @Override
     public String toString() {
         return super.toString() + "Manager{" +
-                "hourSalary=" + hourSalary +
-                ", inEmergency=" + inEmergency + "\n" +
+                "hourSalary=" + hourSalary + "\n" +
                 '}';
     }
 
@@ -95,7 +100,9 @@ public class Manager extends Employee implements EmployeeInterface {
         try {
             int op;
             Scanner sc = new Scanner(System.in);
+            boolean exit = false;
             showMenu();
+
             do {
                 op = sc.nextInt();
                 switch (op) {
@@ -104,10 +111,11 @@ public class Manager extends Employee implements EmployeeInterface {
                         System.out.println(toString());
                         break;
                     }
-                    case 2, 12 -> {
+                    case 2, 13 -> {
                         double hoursWorked = super.clockOut();
                         this.employeeFile = new EmployeeFile();
                         this.employeeFile.saveMeManager(this, hoursWorked);
+                        exit = true;
                         exit(0);
                         break;
                     }
@@ -148,10 +156,14 @@ public class Manager extends Employee implements EmployeeInterface {
                         operationEditPrice();
                         break;
                     }
+                    case 12 ->{
+                        operationViewEmployee();
+                        break;
+                    }
 
 
                 }
-            } while (op > 0 && op < 13);
+            } while (!exit);
         } catch (IOException e) {
             System.out.println("Error al guardar el empleado");
         } finally {
@@ -219,7 +231,8 @@ public class Manager extends Employee implements EmployeeInterface {
         System.out.println("9. Ver mesas");
         System.out.println("10. Eliminar empleado");
         System.out.println("11. Editar precios");
-        System.out.println("12. Salir");
+        System.out.println("12. Ver trabajadores del restaurante");
+        System.out.println("13. Salir");
 
     }
 
@@ -315,6 +328,59 @@ public class Manager extends Employee implements EmployeeInterface {
                 0- Volver\s
                 """;
 
+    }
+    private String menuViewEmployee() {
+        return """
+                Elige una opcion:\s
+                1- Ver trabajadores del salon\s
+                2- Ver trabajadores de la cocina\s
+                3- Ver managers\s
+                0- Volver\s
+                """;
+    }
+
+    private void operationViewEmployee() {
+        Scanner sc = new Scanner(System.in);
+        int op = 0;
+        boolean exit = false;
+        System.out.println(menuViewEmployee());
+        do {
+            if(op != 0)
+                System.out.println("Seguir viendo eligue una opcion");
+            op = sc.nextInt();
+            try {
+
+                switch (op) {
+                    case 0 -> {
+                        exit = true;
+                        break;
+                    }
+                    case 1 -> {
+                        System.out.println(lounge.getEmployees().toString());
+                        break;
+                    }
+                    case 2 -> {
+                        System.out.println(kitchen.getKitchenEmployee().toString());
+                        break;
+                    }
+                    case 3 -> {
+                        showManager();
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Error");
+            }
+
+        } while (!exit);
+    }
+
+    private void showManager(){
+        for (Employee employee : this.myEmployeeList) {
+            if (employee instanceof Manager) {
+                System.out.println(employee.toString());
+            }
+        }
     }
 
 

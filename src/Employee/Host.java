@@ -37,6 +37,10 @@ public class Host extends Employee implements EmployeeInterface {
         this.lounge = lounge;
     }
 
+    public void setMyProfit(double myProfit) {
+        this.myProfit = myProfit;
+    }
+
     public double getHourSalary() {
         return hourSalary;
     }
@@ -50,7 +54,7 @@ public class Host extends Employee implements EmployeeInterface {
     }
 
     public void setTips(double tips) {
-        this.tips = tips;
+        this.tips += tips;
     }
 
     public double getMyProfit() {
@@ -81,7 +85,8 @@ public class Host extends Employee implements EmployeeInterface {
         System.out.println("3. Reservar mesa");
         System.out.println("4. Cancelar reserva");
         System.out.println("5. Ver mesas");
-        System.out.println("6. Salir");
+        System.out.println("6. Agregar Propina");
+        System.out.println("7. Salir");
 
     }
 
@@ -90,18 +95,19 @@ public class Host extends Employee implements EmployeeInterface {
         try {
             int op;
             Scanner sc = new Scanner(System.in);
+            boolean exit = false;
             do {
                 showMenu();
                 op = sc.nextInt();
                 switch (op) {
                     case 1:
                         super.clockIn();
-                        System.out.println(toString());
                         break;
-                    case 2, 6:
+                    case 2, 7:
                         double daySalary = super.clockOut();
                         EmployeeFile file = new EmployeeFile();
                         file.saveMeHost(this, daySalary);
+                        exit = true;
                         exit(0);
                         break;
                     case 3:
@@ -113,8 +119,12 @@ public class Host extends Employee implements EmployeeInterface {
                     case 5:
                         this.lounge.tableOperations();
                         break;
+                    case 6:
+                        System.out.println("Ingrese la cantidad de propina: ");
+                        double tips = sc.nextDouble();
+                        this.setTips(tips);
                 }
-            } while (op > 0 && op < 4);
+            } while (!exit);
 
         } catch (IOException e) {
             System.out.println("Error al guardar");

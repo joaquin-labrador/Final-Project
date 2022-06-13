@@ -55,6 +55,7 @@ public class Food {
     ///endregion
     @Override
     public String toString() {
-        return "Food{" + "food=" + food + ", idFood=" + idFood + ", stock=" + stock + ", expirationDate=" + expirationDate + '}';
+        return "Food{" + "food=" + food + ", idFood=" + idFood + ", " +
+                "stock=" + stock + ", expirationDate=" + expirationDate +  "\n" + '}';
     }
 }

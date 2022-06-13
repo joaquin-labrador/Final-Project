@@ -8,9 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -84,6 +82,35 @@ public class RestoFiles implements FilesOperations {
 
     public Map<Integer, Table> getTableList() {
         return tableList;
+    }
+
+
+    public void changeStockFileFood(Food food) throws IOException {
+        BufferedReader readerFood = null;
+        BufferedWriter writerFood = null;
+        try {
+
+            readerFood = new BufferedReader(new FileReader("JSONFilesResto\\foodStock.json"));
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            this.foodList = gson.fromJson(readerFood,
+                    (new TypeToken<List<Food>>() {
+                    }.getType()));
+            for (Food food1 : foodList) {
+                if (food1.getIdFood().equals(food.getIdFood())) {
+                    food1.setStock(food.getStock());
+                }
+            }
+            writerFood = new BufferedWriter(new FileWriter("JSONFilesResto\\foodStock.json"));
+            gson.toJson(foodList, writerFood);
+            System.out.println("Stock changed");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            assert readerFood != null;
+            readerFood.close();
+            assert writerFood != null;
+            writerFood.close();
+        }
     }
 
     @Override

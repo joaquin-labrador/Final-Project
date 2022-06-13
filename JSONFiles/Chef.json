@@ -1,14 +1,13 @@
 [
   {
     "hourSalary": 23.3,
-    "inEmergency": false,
+    "myProfit": 116.5,
     "name": "Joaquin",
     "lastName": "Labrador",
     "dateOfBrith": "1998-11-06",
     "id": 41458511,
     "isWorking": false,
     "password": "123gf45",
-    "userName": "chefJoaquin",
-    "myProfit" : 0.0
+    "userName": "chefJoaquin"
   }
 ]

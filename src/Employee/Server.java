@@ -91,6 +91,7 @@ public class Server extends Employee
             Scanner sc = new Scanner(System.in);
             int tips = 0;
             double hoursWork = 0;
+            boolean exit = false;
             do {
                 showMenu();
                 op = sc.nextInt();

@@ -1,6 +1,7 @@
 package Employee;
 
 import Files.EmployeeFile;
+import Restaurant.Kitchen;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -9,8 +10,9 @@ import static java.lang.System.exit;
 
 public class Chef extends Employee implements EmployeeInterface {
     private double hourSalary;
-    private boolean inEmergency = false;
     private double myProfit;
+
+    private Kitchen kitchen;
 
 
     //region CONSTRUCTORS GETTERS AND SETTERS
@@ -22,6 +24,9 @@ public class Chef extends Employee implements EmployeeInterface {
         this.hourSalary = hourSalary;
     }
 
+    public void setKitchen(Kitchen kitchen) {
+        this.kitchen = kitchen;
+    }
 
     public double getHourSalary() {
         return hourSalary;
@@ -31,13 +36,6 @@ public class Chef extends Employee implements EmployeeInterface {
         this.hourSalary = hourSalary;
     }
 
-    public boolean isInEmergency() {
-        return inEmergency;
-    }
-
-    public void setInEmergency() {
-        this.inEmergency = true;
-    }
     public double getMyProfit(){
           return this.myProfit;
     }
@@ -49,8 +47,7 @@ public class Chef extends Employee implements EmployeeInterface {
     @Override
     public String toString() {
         return super.toString() + "Chef{" +
-                "hourSalary=" + hourSalary +
-                ", inEmergency=" + inEmergency + "\n" +
+                "hourSalary=" + hourSalary + "\n" +
                 '}';
     }
 
@@ -65,7 +62,8 @@ public class Chef extends Employee implements EmployeeInterface {
         System.out.println("1. Fichar entrada");
         System.out.println("2. Fichar salida");
         System.out.println("3. Agregar stock");
-        System.out.println("4. Salir");
+        System.out.println("4. Ver informacion de la cocina");
+        System.out.println("5. Salir");
     }
 
     @Override
@@ -73,25 +71,29 @@ public class Chef extends Employee implements EmployeeInterface {
         try {
             int op;
             Scanner sc = new Scanner(System.in);
+            boolean exit = false;
             do {
                 showMenu();
                 op = sc.nextInt();
                 switch (op) {
                     case 1:
                         super.clockIn();
-                        System.out.println(toString());
                         break;
-                    case 2 , 4:
+                    case 2 , 5:
                         double salaryDay = super.clockOut();
                         EmployeeFile employeeFile = new EmployeeFile();
                         employeeFile.saveMeChef(this, salaryDay);
+                        exit = true;
                         exit(0);
                         break;
                     case 3:
-                        System.out.println("En desarrollo");
+                        this.kitchen.changeStock();
+                        break;
+                    case 4:
+                        System.out.println(this.kitchen.toString());
                         break;
                 }
-            } while (op > 0 && op < 4);
+            } while (!exit);
         }catch (IOException e){
             System.out.println("Error al guardar");
         }finally {
