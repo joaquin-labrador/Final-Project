@@ -193,17 +193,7 @@ public class Manager extends Employee implements EmployeeInterface {
             System.out.println("El id ingresado no es valido");
         }
     }
-    private String menuAddEmployee() {
-        return """
-                Elige una opcion:\s
-                1- Agregar un Chef\s
-                2- Agregar un Cocinero\s
-                3- Agregar un Manager\s
-                4- Agregar un Camarero\s
-                5- Agregar un Recepcionista\s
-                0- Volver\s
-                """;
-    }
+
     public void addEmployee() throws IOException {
         EmployeeFile employeeFile = new EmployeeFile();
         Scanner sc = new Scanner(System.in);
@@ -363,29 +353,6 @@ public class Manager extends Employee implements EmployeeInterface {
         }
 
     }
-
-    private String menuEditPrice() {
-        return """
-                Elige una opcion:\s
-                1- Editar precio de un menu\s
-                2- Editar precio de una bebida\s
-                0- Volver\s
-                """;
-
-    }
-
-    private String menuViewEmployee() {
-        return """
-                Elige una opcion:\s
-                1- Ver trabajadores del salon\s
-                2- Ver trabajadores de la cocina\s
-                3- Ver managers\s
-                0- Volver\s
-                """;
-    }
-
-
-
     private void operationViewEmployee() {
         Scanner sc = new Scanner(System.in);
         int op = 0;
@@ -429,6 +396,39 @@ public class Manager extends Employee implements EmployeeInterface {
             }
         }
     }
+    private String menuEditPrice() {
+        return """
+                Elige una opcion:\s
+                1- Editar precio de un menu\s
+                2- Editar precio de una bebida\s
+                0- Volver\s
+                """;
+
+    }
+
+    private String menuViewEmployee() {
+        return """
+                Elige una opcion:\s
+                1- Ver trabajadores del salon\s
+                2- Ver trabajadores de la cocina\s
+                3- Ver managers\s
+                0- Volver\s
+                """;
+    }
+    private String menuAddEmployee() {
+        return """
+                Elige una opcion:\s
+                1- Agregar un Chef\s
+                2- Agregar un Cocinero\s
+                3- Agregar un Manager\s
+                4- Agregar un Camarero\s
+                5- Agregar un Recepcionista\s
+                0- Volver\s
+                """;
+    }
+
+
+
 
 
 }
