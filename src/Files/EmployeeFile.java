@@ -155,18 +155,6 @@ public class EmployeeFile implements FilesOperations {
 
     }
 
-    @Override
-    public void showFile() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader("JSONFiles\\Manager.json"));
-            reader.toString();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public List<Employee> getEmployeeList() {
         return employeeList;

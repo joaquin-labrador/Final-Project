@@ -113,8 +113,4 @@ public class RestoFiles implements FilesOperations {
         }
     }
 
-    @Override
-    public void showFile() {
-
-    }
 }
