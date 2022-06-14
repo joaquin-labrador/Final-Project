@@ -91,9 +91,6 @@ public final class AppResto {
         return restoName;
     }
 
-    public void showFile() {
-        employeeFile.showFile();
-    }
 
     public void showAvailableTables() {
 
@@ -110,9 +107,8 @@ public final class AppResto {
         return null;
     }
 
-    public void userOptions(Employee user) throws IOException {
+    public void userOptions(Employee user) {
         try {
-
             if (user instanceof Kitchener userKitchener) {
                 userKitchener.employeeOperations();
             } else if (user instanceof Host userHost) {
