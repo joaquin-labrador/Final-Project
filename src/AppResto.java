@@ -36,7 +36,7 @@ public final class AppResto {
         this.menuList = restoFiles.getMenuList();
         this.tableList = restoFiles.getTableList();
         this.ticketList = ticketFile.getTicketList();
-        this.lounge = new Lounge( tableList, menuList, beveragesList, ticketList);
+        this.lounge = new Lounge(tableList, menuList, beveragesList, ticketList);
         this.lounge.setRestoEmployee(restoEmployee);
         this.kitchen = new Kitchen(foodList);
         this.kitchen.setKitchenEmployeeRead(restoEmployee);
@@ -121,14 +121,12 @@ public final class AppResto {
             } else if (user instanceof Server userServer) {
                 userServer.setLounge(lounge);
                 userServer.employeeOperations();
-            }
-            if (user instanceof Manager userManager) {
+            } else if (user instanceof Manager userManager) {
                 userManager.setLounge(lounge);
                 userManager.setMyEmployeeList(restoEmployee);
                 userManager.setKitchen(kitchen);
                 userManager.employeeOperations();
-            }
-            if (user instanceof Chef userChef) {
+            } else if (user instanceof Chef userChef) {
                 userChef.setKitchen(kitchen);
                 userChef.employeeOperations();
             }

@@ -6,6 +6,7 @@ import Restaurant.Kitchen;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static Files.WriteNewEmployees.changePassword;
 import static java.lang.System.exit;
 
 public class Chef extends Employee implements EmployeeInterface {
@@ -36,8 +37,8 @@ public class Chef extends Employee implements EmployeeInterface {
         this.hourSalary = hourSalary;
     }
 
-    public double getMyProfit(){
-          return this.myProfit;
+    public double getMyProfit() {
+        return this.myProfit;
     }
 
 
@@ -53,7 +54,7 @@ public class Chef extends Employee implements EmployeeInterface {
 
     @Override
     public void calculateProfit(double hours) {
-      this.myProfit += (hours * this.hourSalary);
+        this.myProfit += (hours * this.hourSalary);
     }
 
     @Override
@@ -63,7 +64,8 @@ public class Chef extends Employee implements EmployeeInterface {
         System.out.println("2. Fichar salida");
         System.out.println("3. Agregar stock");
         System.out.println("4. Ver informacion de la cocina");
-        System.out.println("5. Salir");
+        System.out.println("5. Cambiar contraseña");
+        System.out.println("6. Salir");
     }
 
     @Override
@@ -79,7 +81,7 @@ public class Chef extends Employee implements EmployeeInterface {
                     case 1:
                         super.clockIn();
                         break;
-                    case 2 , 5:
+                    case 2, 6:
                         double salaryDay = super.clockOut();
                         EmployeeFile employeeFile = new EmployeeFile();
                         employeeFile.saveMeChef(this, salaryDay);
@@ -92,11 +94,14 @@ public class Chef extends Employee implements EmployeeInterface {
                     case 4:
                         System.out.println(this.kitchen.toString());
                         break;
+                    case 5:
+                        changePassword(this);
+
                 }
             } while (!exit);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Error al guardar");
-        }finally {
+        } finally {
             System.out.println("Gracias por usar nuestro sistema");
         }
 

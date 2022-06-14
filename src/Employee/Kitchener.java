@@ -5,6 +5,7 @@ import Files.EmployeeFile;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static Files.WriteNewEmployees.changePassword;
 import static java.lang.System.exit;
 
 public class Kitchener extends Employee
@@ -53,7 +54,8 @@ public class Kitchener extends Employee
         System.out.println("Selecciona una opcion: ");
         System.out.println("1. Fichar entrada");
         System.out.println("2. Fichar salida");
-        System.out.println("3. Salir");
+        System.out.println("3. Cambiar contraseña");
+        System.out.println("4. Salir");
 
     }
 
@@ -71,13 +73,15 @@ public class Kitchener extends Employee
                     case 1:
                         super.clockIn();
                         break;
-                    case 2, 3:
+                    case 2, 4:
                         double salaryDay = super.clockOut();
                         EmployeeFile employeeFile = new EmployeeFile();
                         employeeFile.saveMeKitchener(this, salaryDay);
                         exit = true;
                         exit(0);
                         break;
+                    case 3:
+                        changePassword(this);
 
 
                 }

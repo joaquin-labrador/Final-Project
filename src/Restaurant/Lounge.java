@@ -251,13 +251,15 @@ public class Lounge implements LoungueTask {
         boolean isTaked = false;
         do {
             try {
-                if (op != 0) System.out.println("Ingrese otra bebida. 11- para terminar");
+                if (op != 0) System.out.println("Ingrese otra bebida");
                 op = sc.nextInt();
-                if (op > 0 && op <= beverages.size()) numbersOfBeverage.add(op);
+                if (op > 0 && op <= beverages.size())
+                    numbersOfBeverage.add(op);
                 else if (op == 11) {
-                    System.out.println("");
                     isTaked = true;
-                } else System.out.println("Numero no validos");
+                } else
+                    System.out.println("Numero no validos");
+
             } catch (InputMismatchException e) {
                 System.out.println("Error ingresaste un caracter no valido");
             }

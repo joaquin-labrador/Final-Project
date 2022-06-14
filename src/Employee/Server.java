@@ -6,6 +6,7 @@ import Restaurant.Lounge;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static Files.WriteNewEmployees.changePassword;
 import static java.lang.System.exit;
 
 public class Server extends Employee
@@ -81,7 +82,8 @@ public class Server extends Employee
         System.out.println("4. Ver Mesas");
         System.out.println("5. Combrar una mesa");
         System.out.println("6. Sumar mi propina");
-        System.out.println("7. Salir");
+        System.out.println("7. Cambiar contraseña");
+        System.out.println("8. Salir");
     }
 
     @Override
@@ -100,7 +102,7 @@ public class Server extends Employee
                         super.clockIn();
                         break;
                     case 2:
-                    case 7:
+                    case 8:
                         hoursWork = super.clockOut();
                         calculateProfit(hoursWork);
                         EmployeeFile file = new EmployeeFile();
@@ -121,6 +123,8 @@ public class Server extends Employee
                         tips = sc.nextInt();
                         this.setTips(tips);
                         break;
+                    case 7:
+                        changePassword(this);
 
 
                 }

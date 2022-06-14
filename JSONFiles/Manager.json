@@ -1,13 +1,24 @@
 [
   {
     "hourSalary": 25.0,
-    "myProfit": 300.0,
+    "myProfit": 500.0,
     "name": "Maximo",
     "lastName": "Torterolo",
     "dateOfBrith": "2002-06-23",
     "id": 44533543,
     "isWorking": false,
-    "password": "34324esds3",
+    "password": "hola123",
     "userName": "managerMaximo"
+  },
+  {
+    "hourSalary": 25.0,
+    "myProfit": 0.0,
+    "name": "Sandra",
+    "lastName": "Velasco",
+    "dateOfBrith": "1960-07-06",
+    "id": 16456789,
+    "isWorking": false,
+    "password": "kasaManager",
+    "userName": "SandraManager"
   }
 ]

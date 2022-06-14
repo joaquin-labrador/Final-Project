@@ -1,18 +1,17 @@
 package Employee;
 
-import Files.EditRestoFile;
-import Files.EmployeeFile;
-import Files.RestoFiles;
-import Files.TicketFile;
+import Files.*;
 import Restaurant.Kitchen;
 import Restaurant.Lounge;
 import Restaurant.Ticket;
 
 import java.io.IOException;
+import java.nio.channels.ScatteringByteChannel;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
+import static Files.WriteNewEmployees.*;
 import static java.lang.System.exit;
 
 public class Manager extends Employee implements EmployeeInterface {
@@ -48,6 +47,7 @@ public class Manager extends Employee implements EmployeeInterface {
     public void setMyEmployeeList(List<Employee> myEmployeeList) {
         this.myEmployeeList = myEmployeeList;
     }
+
     public Double getHourSalary() {
         return hourSalary;
     }
@@ -72,8 +72,6 @@ public class Manager extends Employee implements EmployeeInterface {
     public Lounge getLounge() {
         return lounge;
     }
-
-
 
 
     //endregion
@@ -101,9 +99,10 @@ public class Manager extends Employee implements EmployeeInterface {
             int op;
             Scanner sc = new Scanner(System.in);
             boolean exit = false;
-            showMenu();
+
 
             do {
+                showMenu();
                 op = sc.nextInt();
                 switch (op) {
                     case 1 -> {
@@ -111,7 +110,7 @@ public class Manager extends Employee implements EmployeeInterface {
                         System.out.println(toString());
                         break;
                     }
-                    case 2, 13 -> {
+                    case 2, 14 -> {
                         double hoursWorked = super.clockOut();
                         this.employeeFile = new EmployeeFile();
                         this.employeeFile.saveMeManager(this, hoursWorked);
@@ -156,11 +155,14 @@ public class Manager extends Employee implements EmployeeInterface {
                         operationEditPrice();
                         break;
                     }
-                    case 12 ->{
+                    case 12 -> {
                         operationViewEmployee();
                         break;
                     }
-
+                    case 13 -> {
+                        changePassword(this);
+                        break;
+                    }
 
                 }
             } while (!exit);
@@ -170,6 +172,7 @@ public class Manager extends Employee implements EmployeeInterface {
             System.out.println("Gracias por usar el sistema");
         }
     }
+
 
     public void deleteEmployee() {
 
@@ -190,18 +193,58 @@ public class Manager extends Employee implements EmployeeInterface {
             System.out.println("El id ingresado no es valido");
         }
     }
-
-    public void addEmployee() throws IOException {
-        Kitchener newEmployee = new Kitchener("Kevin", "Reynoso", LocalDate.of(1999, 3, 9).toString(),
-                43567798, "kevin", "123", Salarys.MANAGER.getSalary());
-        try {
-            EmployeeFile employeeFile = new EmployeeFile();
-            employeeFile.writeFile(newEmployee);
-        } catch (IOException e) {
-            System.out.println("Error al escribir en el archivo");
-            exit(0);
-        }
+    private String menuAddEmployee() {
+        return """
+                Elige una opcion:\s
+                1- Agregar un Chef\s
+                2- Agregar un Cocinero\s
+                3- Agregar un Manager\s
+                4- Agregar un Camarero\s
+                5- Agregar un Recepcionista\s
+                0- Volver\s
+                """;
     }
+    public void addEmployee() throws IOException {
+        EmployeeFile employeeFile = new EmployeeFile();
+        Scanner sc = new Scanner(System.in);
+        System.out.println(menuAddEmployee());
+        int op = sc.nextInt();
+        AddEmployee addEmployee = new AddEmployee();
+        try {
+            switch (op) {
+                case 1:
+                    Chef chef = addEmployee.addChef();
+                    employeeFile.writeFile(chef);
+                    break;
+            case 2:
+                Kitchener kitchener = addEmployee.addKitchener();
+                employeeFile.writeFile(kitchener);
+                break;
+            case 3:
+                Manager manager = addEmployee.addManager();
+                employeeFile.writeFile(manager);
+                break;
+            case 4:
+                Server server = addEmployee.addServer();
+                employeeFile.writeFile(server);
+                break;
+            case 5:
+                Host host = addEmployee.addHost();
+                employeeFile.writeFile(host);
+                break;
+            case 0:
+                break;
+
+
+            }
+        } catch (Exception e) {
+            System.out.println("El id ingresado no es valido");
+        }
+
+
+
+    }
+
 
     private double getTotalProfit() {
         TicketFile ticketFile = new TicketFile();
@@ -232,7 +275,8 @@ public class Manager extends Employee implements EmployeeInterface {
         System.out.println("10. Eliminar empleado");
         System.out.println("11. Editar precios");
         System.out.println("12. Ver trabajadores del restaurante");
-        System.out.println("13. Salir");
+        System.out.println("13. Cambiar contraseña");
+        System.out.println("14. Salir");
 
     }
 
@@ -329,6 +373,7 @@ public class Manager extends Employee implements EmployeeInterface {
                 """;
 
     }
+
     private String menuViewEmployee() {
         return """
                 Elige una opcion:\s
@@ -339,13 +384,15 @@ public class Manager extends Employee implements EmployeeInterface {
                 """;
     }
 
+
+
     private void operationViewEmployee() {
         Scanner sc = new Scanner(System.in);
         int op = 0;
         boolean exit = false;
         System.out.println(menuViewEmployee());
         do {
-            if(op != 0)
+            if (op != 0)
                 System.out.println("Seguir viendo eligue una opcion");
             op = sc.nextInt();
             try {
@@ -375,7 +422,7 @@ public class Manager extends Employee implements EmployeeInterface {
         } while (!exit);
     }
 
-    private void showManager(){
+    private void showManager() {
         for (Employee employee : this.myEmployeeList) {
             if (employee instanceof Manager) {
                 System.out.println(employee.toString());

@@ -6,6 +6,7 @@ import Restaurant.Lounge;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static Files.WriteNewEmployees.changePassword;
 import static java.lang.System.exit;
 
 public class Host extends Employee implements EmployeeInterface {
@@ -86,7 +87,8 @@ public class Host extends Employee implements EmployeeInterface {
         System.out.println("4. Cancelar reserva");
         System.out.println("5. Ver mesas");
         System.out.println("6. Agregar Propina");
-        System.out.println("7. Salir");
+        System.out.println("7. Cambiar contraseña");
+        System.out.println("8. Salir");
 
     }
 
@@ -103,7 +105,7 @@ public class Host extends Employee implements EmployeeInterface {
                     case 1:
                         super.clockIn();
                         break;
-                    case 2, 7:
+                    case 2, 8:
                         double daySalary = super.clockOut();
                         EmployeeFile file = new EmployeeFile();
                         file.saveMeHost(this, daySalary);
@@ -123,6 +125,9 @@ public class Host extends Employee implements EmployeeInterface {
                         System.out.println("Ingrese la cantidad de propina: ");
                         double tips = sc.nextDouble();
                         this.setTips(tips);
+                        break;
+                    case 7:
+                        changePassword(this);
                 }
             } while (!exit);
 
